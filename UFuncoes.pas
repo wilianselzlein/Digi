@@ -155,10 +155,8 @@ var i: Integer;
 begin
   Result := '';
   for i := 1 to Length(Value) do
-  begin
     if Value[i] in ['0'..'9'] then
       Result := Result + Value[i];
-  end;
 end;
 
 procedure RelacionaVendaTroca(ATipo: TVendaTroca);
