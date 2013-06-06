@@ -52,7 +52,7 @@ object Dm: TDm
     Left = 104
     Top = 16
     Bitmap = {
-      494C01010F0018011C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010F002001200110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -593,7 +593,7 @@ object Dm: TDm
     Left = 168
     Top = 16
     Bitmap = {
-      494C01010900A001A40120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010900A801A80120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       000000000000000000000000000000000000F4F7F0107EB455BF539C1EFF539C
       1EFF539C1EFF539C1EFF539C1EFF539C1EFF539C1EFF539C1EFF79B548FFFFFF
@@ -2827,6 +2827,7 @@ object Dm: TDm
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Maximized = False
     PreviewOptions.MDIChild = True
     PreviewOptions.Modal = False
     PreviewOptions.Zoom = 1.000000000000000000
@@ -3182,6 +3183,7 @@ object Dm: TDm
     DotMatrixReport = False
     IniFile = '\Software\Fast Reports'
     PreviewOptions.Buttons = [pbPrint, pbLoad, pbSave, pbExport, pbZoom, pbFind, pbOutline, pbPageSetup, pbTools, pbEdit, pbNavigator, pbExportQuick]
+    PreviewOptions.Maximized = False
     PreviewOptions.MDIChild = True
     PreviewOptions.Modal = False
     PreviewOptions.Zoom = 1.000000000000000000
