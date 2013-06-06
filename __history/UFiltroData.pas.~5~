@@ -1,0 +1,45 @@
+unit UFiltroData;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.ToolWin, Vcl.StdCtrls,
+  Vcl.ExtCtrls;
+
+type
+  TFFiltroData = class(TForm)
+    Panel2: TPanel;
+    Label4: TLabel;
+    txtPesquisa: TEdit;
+    ToolBar1: TToolBar;
+    ToolButton10: TToolButton;
+    txtDataIni: TDateTimePicker;
+    txtDataFim: TDateTimePicker;
+    Label1: TLabel;
+    procedure ToolButton10Click(Sender: TObject);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FFiltroData: TFFiltroData;
+
+implementation
+
+{$R *.dfm}
+
+procedure TFFiltroData.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+    Action := CaFree;
+end;
+
+procedure TFFiltroData.ToolButton10Click(Sender: TObject);
+begin
+    Close;
+end;
+
+end.

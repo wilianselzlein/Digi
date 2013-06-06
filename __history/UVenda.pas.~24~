@@ -1,0 +1,35 @@
+unit UVenda;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPadrao, Data.DB, Vcl.Mask, Vcl.DBCtrls,
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.DBLookup;
+
+type
+  TFVenda = class(TFPadrao)
+    DBGrid1: TDBGrid;
+    Splitter1: TSplitter;
+    DSItem: TDataSource;
+    DBEdit1: TDBEdit;
+    Label1: TLabel;
+    Label2: TLabel;
+    DBMemo1: TDBMemo;
+    DBLookupComboBox1: TDBLookupComboBox;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FVenda: TFVenda;
+
+implementation
+
+{$R *.dfm}
+
+uses UDataMod;
+
+end.

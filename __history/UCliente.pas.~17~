@@ -1,0 +1,58 @@
+unit UCliente;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPadrao, Data.DB, Vcl.Mask, Vcl.DBCtrls,
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, DBClient;
+
+type
+  TCliente = class
+  private
+    FTelefone: String;
+    FNome: String;
+    FCidade: String;
+    FCodigo: String;
+  public
+    property Telefone: String read FTelefone write FTelefone;
+    property Nome: String read FNome write FNome;
+    property Cidade: String read FCidade write FCidade;
+    property Codigo: String read FCodigo write FCodigo;
+  end;
+  TFCliente = class(TFPadrao)
+    DBEdit1: TDBEdit;
+    Label1: TLabel;
+    DBEdit2: TDBEdit;
+    Label2: TLabel;
+    DBEdit3: TDBEdit;
+    Label3: TLabel;
+    procedure Importar; override;
+    procedure Imprimir; override;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FCliente: TFCliente;
+
+implementation
+
+{$R *.dfm}
+
+uses UDataMod;
+
+procedure TFCliente.Importar;
+var Lista: TList<TCliente>;
+begin
+    showmessage('Importar');
+end;
+
+procedure TFCliente.Imprimir;
+begin
+  dm.frxCliente.ShowReport(True);
+end;
+
+end.

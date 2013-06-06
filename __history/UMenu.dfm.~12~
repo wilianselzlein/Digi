@@ -1,0 +1,95 @@
+object FMenu: TFMenu
+  Left = 0
+  Top = 0
+  Caption = 'FMenu'
+  ClientHeight = 334
+  ClientWidth = 622
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsMDIForm
+  Menu = MainMenu
+  OldCreateOrder = False
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object ToolBarMenu: TToolBar
+    Left = 0
+    Top = 0
+    Width = 622
+    Height = 70
+    AutoSize = True
+    ButtonHeight = 70
+    ButtonWidth = 71
+    Caption = 'ToolBarMenu'
+    DrawingStyle = dsGradient
+    GradientEndColor = clMoneyGreen
+    HotTrackColor = clMoneyGreen
+    Images = Dm.ImageList2
+    ParentShowHint = False
+    ShowHint = True
+    TabOrder = 0
+    Transparent = True
+    object btnCliente: TToolButton
+      Left = 0
+      Top = 0
+      Hint = 'Clientes'
+      ImageIndex = 0
+    end
+    object btnProduto: TToolButton
+      Left = 71
+      Top = 0
+      Hint = 'Produtos'
+      ImageIndex = 2
+    end
+    object btnVenda: TToolButton
+      Left = 142
+      Top = 0
+      Hint = 'Vendas'
+      ImageIndex = 3
+    end
+    object ToolButton9: TToolButton
+      Left = 213
+      Top = 0
+      Width = 8
+      ImageIndex = 7
+      Style = tbsSeparator
+    end
+    object btnSair: TToolButton
+      Left = 221
+      Top = 0
+      Hint = 'Sair'
+      ImageIndex = 6
+    end
+  end
+  object MainMenu: TMainMenu
+    Images = Dm.ImageList2
+    Left = 152
+    Top = 176
+    object miCadastros: TMenuItem
+      Caption = '&Cadastros'
+      object miCliente: TMenuItem
+        Caption = '&Clientes'
+        ImageIndex = 0
+      end
+      object miProduto: TMenuItem
+        Caption = 'P&rodutos'
+        ImageIndex = 2
+      end
+      object miVendas: TMenuItem
+        Caption = '&Vendas'
+        ImageIndex = 3
+        Visible = False
+      end
+    end
+    object miSair: TMenuItem
+      Caption = '&Sair'
+      OnClick = miSairClick
+    end
+  end
+end

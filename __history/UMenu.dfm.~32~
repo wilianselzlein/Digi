@@ -1,0 +1,156 @@
+object FMenu: TFMenu
+  Left = 0
+  Top = 0
+  Caption = 'FMenu'
+  ClientHeight = 422
+  ClientWidth = 696
+  Color = clWhite
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsMDIForm
+  Menu = MainMenu1
+  OldCreateOrder = False
+  WindowState = wsMaximized
+  OnClose = FormClose
+  OnShow = FormShow
+  PixelsPerInch = 96
+  TextHeight = 13
+  object ToolBarMenu: TToolBar
+    Left = 0
+    Top = 0
+    Width = 696
+    Height = 38
+    AutoSize = True
+    ButtonHeight = 38
+    ButtonWidth = 111
+    Caption = 'ToolBarMenu'
+    DrawingStyle = dsGradient
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlack
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    GradientEndColor = clWhite
+    GradientStartColor = clMoneyGreen
+    HotTrackColor = clMoneyGreen
+    Images = Dm.ImageList2
+    List = True
+    ParentFont = False
+    ParentShowHint = False
+    ShowCaptions = True
+    ShowHint = True
+    TabOrder = 0
+    Transparent = True
+    object btnCliente: TToolButton
+      Left = 0
+      Top = 0
+      Hint = 'Clientes'
+      Caption = '&Clientes F3'
+      ImageIndex = 0
+      OnClick = btnClienteClick
+    end
+    object btnProduto: TToolButton
+      Left = 111
+      Top = 0
+      Hint = 'Produtos'
+      Caption = '&Produtos F7'
+      ImageIndex = 1
+      OnClick = btnProdutoClick
+    end
+    object ToolButton2: TToolButton
+      Left = 222
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton2'
+      ImageIndex = 4
+      Style = tbsSeparator
+    end
+    object btnVenda: TToolButton
+      Left = 230
+      Top = 0
+      Hint = 'Vendas'
+      Caption = '&Vendas F1'
+      ImageIndex = 2
+      OnClick = btnVendaClick
+    end
+    object btnTroca: TToolButton
+      Left = 341
+      Top = 0
+      Caption = '&Trocas F2'
+      ImageIndex = 4
+      OnClick = btnTrocaClick
+    end
+    object ToolButton4: TToolButton
+      Left = 452
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton4'
+      ImageIndex = 4
+      Style = tbsSeparator
+    end
+    object btnBalcao: TToolButton
+      Left = 460
+      Top = 0
+      Caption = '&Balc'#227'o F4'
+      ImageIndex = 5
+      OnClick = btnBalcaoClick
+    end
+    object ToolButton9: TToolButton
+      Left = 571
+      Top = 0
+      Width = 8
+      ImageIndex = 7
+      Style = tbsSeparator
+    end
+    object btnSair: TToolButton
+      Left = 579
+      Top = 0
+      Hint = 'Sair'
+      Caption = '&Sair Alt+F4'
+      ImageIndex = 3
+      OnClick = btnSairClick
+    end
+  end
+  object MainMenu1: TMainMenu
+    Left = 336
+    Top = 208
+    object Cadastros1: TMenuItem
+      Caption = 'Cadastros'
+      object miClientes: TMenuItem
+        Caption = 'Clientes'
+        ShortCut = 114
+        OnClick = btnClienteClick
+      end
+      object miProdutos: TMenuItem
+        Caption = 'Produtos'
+        ShortCut = 118
+        OnClick = btnProdutoClick
+      end
+    end
+    object Movimentaes1: TMenuItem
+      Caption = 'Movimenta'#231#245'es'
+      object miVendas: TMenuItem
+        Caption = 'Vendas'
+        ShortCut = 112
+        OnClick = btnVendaClick
+      end
+      object miTrocas: TMenuItem
+        Caption = 'Trocas'
+        ShortCut = 113
+        OnClick = btnTrocaClick
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object miBalcao: TMenuItem
+        Caption = 'Balc'#227'o'
+      end
+    end
+    object Sair1: TMenuItem
+      Caption = 'Sair'
+    end
+  end
+end

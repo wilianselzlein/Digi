@@ -1,0 +1,45 @@
+unit UTroca;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPadrao, Data.DB, Vcl.Mask, Vcl.DBCtrls,
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.DBLookup;
+
+type
+  TFTroca = class(TFPadrao)
+    DBGrid1: TDBGrid;
+    Splitter1: TSplitter;
+    DSItem: TDataSource;
+    DBEdit1: TDBEdit;
+    Label1: TLabel;
+    DBMemo1: TDBMemo;
+    Label2: TLabel;
+    DBLookupComboBox1: TDBLookupComboBox;
+    DsVenda: TDataSource;
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FTroca: TFTroca;
+
+implementation
+
+{$R *.dfm}
+
+uses UDataMod, UFuncoes;
+
+procedure TFTroca.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  inherited;
+  GridDrawColumnCell(Sender, Rect, DataCol, Column, State);
+end;
+
+end.

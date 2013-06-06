@@ -1,0 +1,460 @@
+object FVendaTroca: TFVendaTroca
+  Left = 0
+  Top = 0
+  Caption = 'Vendas & Trocas'
+  ClientHeight = 272
+  ClientWidth = 650
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Font.Style = []
+  FormStyle = fsMDIChild
+  OldCreateOrder = False
+  Position = poMainFormCenter
+  Visible = True
+  OnClose = FormClose
+  PixelsPerInch = 96
+  TextHeight = 13
+  object Panel2: TPanel
+    Left = 0
+    Top = 0
+    Width = 650
+    Height = 33
+    Align = alTop
+    BevelOuter = bvNone
+    Color = clWhite
+    ParentBackground = False
+    TabOrder = 0
+    DesignSize = (
+      650
+      33)
+    object Label1: TLabel
+      Left = 137
+      Top = 10
+      Width = 33
+      Height = 13
+      Caption = 'Cliente'
+    end
+    object Label2: TLabel
+      Left = 9
+      Top = 10
+      Width = 23
+      Height = 13
+      Caption = 'Data'
+    end
+    object DBEdit1: TDBEdit
+      Left = 176
+      Top = 7
+      Width = 55
+      Height = 21
+      DataField = 'CLIENTES_ID'
+      DataSource = Dm.DSVenda
+      TabOrder = 0
+    end
+    object DBEdit2: TDBEdit
+      Left = 48
+      Top = 7
+      Width = 81
+      Height = 21
+      DataField = 'DATAVENDA'
+      DataSource = Dm.DSVenda
+      TabOrder = 1
+    end
+    object DBLookupCombo1: TDBLookupCombo
+      Left = 237
+      Top = 6
+      Width = 224
+      Height = 21
+      DataField = 'LKPCliente'
+      DataSource = Dm.DSVenda
+      Anchors = [akLeft, akTop, akRight]
+      TabOrder = 2
+    end
+    object DBNav: TDBNavigator
+      Left = 467
+      Top = 0
+      Width = 183
+      Height = 33
+      DataSource = Dm.DSVenda
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbRefresh]
+      Align = alRight
+      Flat = True
+      Ctl3D = True
+      Hints.Strings = (
+        'Primeiro'
+        'Anterior'
+        'Pr'#243'ximo'
+        #218'ltimo'
+        ''
+        ''
+        ''
+        ''
+        ''
+        'Fechar')
+      Kind = dbnHorizontal
+      ParentCtl3D = False
+      ParentShowHint = False
+      ShowHint = True
+      TabOrder = 3
+    end
+  end
+  object Panel3: TPanel
+    Left = 412
+    Top = 55
+    Width = 238
+    Height = 195
+    Align = alRight
+    BevelOuter = bvNone
+    Color = clMoneyGreen
+    ParentBackground = False
+    TabOrder = 1
+    object Label5: TLabel
+      Left = 6
+      Top = -1
+      Width = 59
+      Height = 16
+      Caption = 'Produto:'
+      FocusControl = txtId
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label4: TLabel
+      Left = 6
+      Top = 67
+      Width = 38
+      Height = 16
+      Caption = 'Qtde:'
+      FocusControl = DBEdit4
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label6: TLabel
+      Left = 92
+      Top = 67
+      Width = 46
+      Height = 16
+      Caption = 'Pre'#231'o:'
+      FocusControl = DBEdit5
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label8: TLabel
+      Left = 46
+      Top = 69
+      Width = 40
+      Height = 13
+      Caption = '(insert)'
+      FocusControl = DBEdit4
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label7: TLabel
+      Left = 138
+      Top = 69
+      Width = 39
+      Height = 13
+      Caption = '(home)'
+      FocusControl = DBEdit4
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -11
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label9: TLabel
+      Left = 6
+      Top = 149
+      Width = 37
+      Height = 16
+      Caption = 'Total'
+      FocusControl = DBEdit4
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label3: TLabel
+      Left = 6
+      Top = 108
+      Width = 58
+      Height = 16
+      Caption = 'Vendas:'
+      FocusControl = DBEdit4
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object Label10: TLabel
+      Left = 92
+      Top = 109
+      Width = 54
+      Height = 16
+      Caption = 'Trocas:'
+      FocusControl = DBEdit4
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
+    object txtId: TDBEdit
+      Left = 6
+      Top = 17
+      Width = 219
+      Height = 21
+      DataField = 'ID'
+      TabOrder = 0
+    end
+    object DBEdit4: TDBEdit
+      Left = 6
+      Top = 83
+      Width = 82
+      Height = 21
+      DataField = 'ID'
+      TabOrder = 1
+    end
+    object DBEdit5: TDBEdit
+      Left = 92
+      Top = 83
+      Width = 82
+      Height = 21
+      DataField = 'ID'
+      TabOrder = 2
+    end
+    object DBEdit6: TDBEdit
+      Left = 6
+      Top = 42
+      Width = 219
+      Height = 21
+      DataField = 'ID'
+      TabOrder = 3
+    end
+    object DBEdit3: TDBEdit
+      Left = 6
+      Top = 168
+      Width = 171
+      Height = 21
+      TabOrder = 4
+    end
+    object DBEdit7: TDBEdit
+      Left = 7
+      Top = 125
+      Width = 81
+      Height = 21
+      TabOrder = 5
+    end
+    object DBEdit8: TDBEdit
+      Left = 93
+      Top = 126
+      Width = 81
+      Height = 21
+      TabOrder = 6
+    end
+  end
+  object ToolBar1: TToolBar
+    Left = 0
+    Top = 250
+    Width = 650
+    Height = 22
+    Align = alBottom
+    AutoSize = True
+    ButtonWidth = 85
+    Caption = 'ToolBar1'
+    DrawingStyle = dsGradient
+    GradientEndColor = clWindow
+    GradientStartColor = clMoneyGreen
+    Images = Dm.ImageList1
+    List = True
+    ShowCaptions = True
+    TabOrder = 2
+    object ToolButton1: TToolButton
+      Left = 0
+      Top = 0
+      Caption = 'Novo F4'
+      ImageIndex = 4
+    end
+    object ToolButton2: TToolButton
+      Left = 85
+      Top = 0
+      Caption = 'Gravar F5'
+      ImageIndex = 7
+    end
+    object ToolButton9: TToolButton
+      Left = 170
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton9'
+      ImageIndex = 14
+      Style = tbsSeparator
+    end
+    object ToolButton3: TToolButton
+      Left = 178
+      Top = 0
+      Caption = 'Deletar'
+      ImageIndex = 5
+    end
+    object ToolButton4: TToolButton
+      Left = 263
+      Top = 0
+      Caption = 'Produtos F7'
+      ImageIndex = 12
+    end
+    object ToolButton8: TToolButton
+      Left = 348
+      Top = 0
+      Caption = 'Clientes F3'
+      ImageIndex = 13
+    end
+    object ToolButton11: TToolButton
+      Left = 433
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton11'
+      ImageIndex = 15
+      Style = tbsSeparator
+    end
+    object ToolButton10: TToolButton
+      Left = 441
+      Top = 0
+      Caption = 'Consultar'
+      ImageIndex = 10
+    end
+    object ToolButton12: TToolButton
+      Left = 526
+      Top = 0
+      Caption = 'Finalizar F9'
+      ImageIndex = 14
+    end
+  end
+  object ToolBar2: TToolBar
+    Left = 0
+    Top = 33
+    Width = 650
+    Height = 22
+    AutoSize = True
+    ButtonWidth = 72
+    Caption = 'ToolBar1'
+    DrawingStyle = dsGradient
+    GradientEndColor = clMoneyGreen
+    Images = Dm.ImageList1
+    List = True
+    ShowCaptions = True
+    TabOrder = 3
+    object ToolButton5: TToolButton
+      Left = 0
+      Top = 0
+      Caption = 'Venda F1'
+      ImageIndex = 11
+    end
+    object ToolButton7: TToolButton
+      Left = 72
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton7'
+      ImageIndex = 10
+      Style = tbsSeparator
+    end
+    object ToolButton6: TToolButton
+      Left = 80
+      Top = 0
+      Caption = 'Troca F2'
+      Enabled = False
+      ImageIndex = 9
+    end
+  end
+  object DBGrid1: TDBGrid
+    Left = 0
+    Top = 55
+    Width = 412
+    Height = 195
+    Align = alClient
+    Color = clWhite
+    DataSource = Dm.DSItemVenda
+    FixedColor = clMoneyGreen
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -11
+    Font.Name = 'MS Sans Serif'
+    Font.Style = []
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    ParentFont = False
+    TabOrder = 4
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -13
+    TitleFont.Name = 'MS Sans Serif'
+    TitleFont.Style = [fsBold]
+    Columns = <
+      item
+        Alignment = taCenter
+        Expanded = False
+        FieldName = 'ID'
+        Title.Alignment = taCenter
+        Title.Caption = 'Id'
+        Width = 41
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ITEM'
+        Title.Caption = 'Item'
+        Width = 39
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'LKPProduto'
+        Title.Caption = 'Produto'
+        Width = 144
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'QUANTIDADE'
+        Title.Alignment = taRightJustify
+        Title.Caption = 'Quant'
+        Width = 50
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'PRECO'
+        Title.Alignment = taRightJustify
+        Title.Caption = 'Pre'#231'o'
+        Width = 50
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'Total'
+        Title.Alignment = taRightJustify
+        Width = 50
+        Visible = True
+      end>
+  end
+end

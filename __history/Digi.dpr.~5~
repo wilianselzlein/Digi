@@ -1,0 +1,19 @@
+program Digi;
+
+uses
+  Vcl.Forms,
+  UMenu in 'UMenu.pas' {FMenu},
+  UDataMod in 'UDataMod.pas' {Dm: TDataModule},
+  UPadrao in 'UPadrao.pas' {FPadrao},
+  UFuncoes in 'UFuncoes.pas';
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TFMenu, FMenu);
+  Application.CreateForm(TDm, Dm);
+  Application.CreateForm(TFPadrao, FPadrao);
+  Application.Run;
+end.

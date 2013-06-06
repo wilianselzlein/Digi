@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2013/04/04 13:49:49.000.537,=C:\Users\USER\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013/04/04 13:49:49.000.603,=C:\Users\USER\Documents\RAD Studio\Projects\ServerMethodsUnit1.pas</Transaction>
+    <Transaction>2013/04/04 13:49:50.000.855,=C:\Users\USER\Documents\RAD Studio\Projects\ServerContainerUnit1.pas</Transaction>
+    <Transaction>2013/05/21 16:15:02.000.397,=C:\Users\USER\Documents\RAD Studio\Projects\Unit1.pas</Transaction>
+    <Transaction>2013/05/21 16:19:26.000.702,=C:\Users\USER\Documents\RAD Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2013/05/21 16:19:49.000.680,C:\Users\USER\Documents\RAD Studio\Projects\Unit2.pas=D:\Wilian\Digi\UDm.pas</Transaction>
+    <Transaction>2013/05/21 16:19:49.000.680,C:\Users\USER\Documents\RAD Studio\Projects\Unit2.dfm=D:\Wilian\Digi\UDm.dfm</Transaction>
+    <Transaction>2013/05/21 16:19:52.000.800,C:\Users\USER\Documents\RAD Studio\Projects\Unit1.pas=D:\Wilian\Digi\UMenu.pas</Transaction>
+    <Transaction>2013/05/21 16:19:52.000.800,C:\Users\USER\Documents\RAD Studio\Projects\Unit1.dfm=D:\Wilian\Digi\UMenu.dfm</Transaction>
+    <Transaction>2013/05/21 16:19:56.000.110,C:\Users\USER\Documents\RAD Studio\Projects\Project1.dproj=D:\Wilian\Digi\Digi.dproj</Transaction>
+    <Transaction>2013/05/21 18:00:45.000.262,D:\Wilian\Digi\UDm.pas=</Transaction>
+    <Transaction>2013/05/21 18:01:19.000.227,=D:\Wilian\Digi\UDataMod.pas</Transaction>
+    <Transaction>2013/05/22 09:00:43.000.702,=D:\Wilian\Digi\Unit1.pas</Transaction>
+    <Transaction>2013/05/22 09:04:58.000.063,D:\Wilian\Digi\Unit1.pas=D:\Wilian\Digi\UPadrao.pas</Transaction>
+    <Transaction>2013/05/22 09:04:58.000.063,D:\Wilian\Digi\Unit1.dfm=D:\Wilian\Digi\UPadrao.dfm</Transaction>
+    <Transaction>2013/05/22 09:29:41.000.507,=D:\Wilian\Digi\Unit1.pas</Transaction>
+    <Transaction>2013/05/22 09:29:47.000.181,D:\Wilian\Digi\Unit1.pas=D:\Wilian\Digi\UFuncoes.pas</Transaction>
+    <Transaction>2013/05/22 10:29:39.000.688,=D:\Wilian\Digi\Unit1.pas</Transaction>
+    <Transaction>2013/05/22 10:30:00.000.926,D:\Wilian\Digi\Unit1.dfm=D:\Wilian\Digi\UProduto.dfm</Transaction>
+    <Transaction>2013/05/22 10:30:00.000.926,D:\Wilian\Digi\Unit1.pas=D:\Wilian\Digi\UProduto.pas</Transaction>
+    <Transaction>2013/05/22 11:28:45.000.778,=D:\Wilian\Digi\Unit1.pas</Transaction>
+    <Transaction>2013/05/22 11:29:42.000.774,D:\Wilian\Digi\Unit1.dfm=D:\Wilian\Digi\UCliente.dfm</Transaction>
+    <Transaction>2013/05/22 11:29:42.000.774,D:\Wilian\Digi\Unit1.pas=D:\Wilian\Digi\UCliente.pas</Transaction>
+    <Transaction>2013/05/22 13:15:29.000.464,=D:\Wilian\Digi\Unit1.pas</Transaction>
+    <Transaction>2013/05/22 13:20:28.000.296,D:\Wilian\Digi\UVenda.pas=D:\Wilian\Digi\Unit1.pas</Transaction>
+    <Transaction>2013/05/22 13:20:28.000.296,D:\Wilian\Digi\UVenda.dfm=D:\Wilian\Digi\Unit1.dfm</Transaction>
+    <Transaction>2013/05/22 15:23:47.000.650,=D:\Wilian\Digi\UVendaTroca.pas</Transaction>
+    <Transaction>2013/05/22 15:37:13.000.569,=D:\Wilian\Digi\Unit1.pas</Transaction>
+    <Transaction>2013/05/22 15:37:32.000.488,D:\Wilian\Digi\UVenda.dfm=D:\Wilian\Digi\Unit1.dfm</Transaction>
+    <Transaction>2013/05/22 15:37:32.000.488,D:\Wilian\Digi\UVenda.pas=D:\Wilian\Digi\Unit1.pas</Transaction>
+    <Transaction>2013/05/22 16:17:06.000.434,D:\Wilian\Digi\UTroca.dfm=D:\Wilian\Digi\UVenda.dfm</Transaction>
+    <Transaction>2013/05/22 16:17:06.000.434,D:\Wilian\Digi\UTroca.pas=D:\Wilian\Digi\UVenda.pas</Transaction>
+    <Transaction>2013/05/22 16:17:17.000.852,=D:\Wilian\Digi\UVenda.pas</Transaction>
+    <Transaction>2013/05/28 15:39:43.000.680,=D:\Wilian\Digi\Unit1.pas</Transaction>
+    <Transaction>2013/05/28 15:39:56.000.901,D:\Wilian\Digi\UThreadExecSql.pas=D:\Wilian\Digi\Unit1.pas</Transaction>
+    <Transaction>2013/05/28 17:00:19.000.536,=D:\Wilian\Digi\Unit1.pas</Transaction>
+    <Transaction>2013/05/28 17:56:56.000.125,D:\Wilian\Digi\Unit1.dfm=D:\Wilian\Digi\UFiltroData.dfm</Transaction>
+    <Transaction>2013/05/28 17:56:56.000.125,D:\Wilian\Digi\Unit1.pas=D:\Wilian\Digi\UFiltroData.pas</Transaction>
+  </Transactions>
+</BorlandProject>

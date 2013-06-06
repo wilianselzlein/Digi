@@ -1,0 +1,95 @@
+unit UPadrao;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Mask, Vcl.DBCtrls, Vcl.StdCtrls, DBClient,
+  Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Data.DB;
+
+type
+  TFPadrao = class(TForm)
+    DBGrid: TDBGrid;
+    Panel2: TPanel;
+    Label4: TLabel;
+    txtPesquisa: TEdit;
+    Panel1: TPanel;
+    DBNavAcao: TDBNavigator;
+    Label5: TLabel;
+    txtId: TDBEdit;
+    DBNav: TDBNavigator;
+    DataSource: TDataSource;
+    procedure FormShow(Sender: TObject);
+    procedure DBGridTitleClick(Column: TColumn);
+    procedure txtPesquisaChange(Sender: TObject);
+    procedure txtPesquisaKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
+    procedure DataSourceDataChange(Sender: TObject; Field: TField);
+    procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure FormClose(Sender: TObject; var Action: TCloseAction);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FPadrao: TFPadrao;
+
+implementation
+
+{$R *.dfm}
+
+uses UDataMod, UFuncoes;
+
+procedure TFPadrao.DataSourceDataChange(Sender: TObject; Field: TField);
+begin
+//    ChangeDBNav(DBNavAcao, Sender);
+end;
+
+procedure TFPadrao.DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+  if not odd(DBGrid.DataSource.DataSet.RecNo) then
+    if not (gdSelected in State) then
+    begin
+      DBGrid.Canvas.Brush.Color := clMoneyGreen;
+      DBGrid.Canvas.FillRect(Rect);
+    end;
+  DBGrid.DefaultDrawDataCell(Rect, DBGrid.columns[DataCol].field, State);
+end;
+
+procedure TFPadrao.DBGridTitleClick(Column: TColumn);
+begin
+  TClientDataSet(Datasource.DataSet).IndexFieldNames := Column.FieldName;
+end;
+
+procedure TFPadrao.FormClose(Sender: TObject; var Action: TCloseAction);
+begin
+  Action := Cafree;
+end;
+
+procedure TFPadrao.FormShow(Sender: TObject);
+begin
+  txtPesquisa.SetFocus;
+  if not DataSource.DataSet.Active then
+    DataSource.DataSet.Open;
+end;
+
+procedure TFPadrao.txtPesquisaChange(Sender: TObject);
+begin
+  if txtPesquisa.Text <> '' then
+    Dm.CDSProduto.Locate(Dm.CDSProduto.IndexFieldNames,txtpesquisa.Text,[loPartialKey, loCaseInsensitive]);
+end;
+
+procedure TFPadrao.txtPesquisaKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  if (key = 13) or (key = 40) then
+    Perform(WM_nextDlgCtl, 0, 0);
+  if (key = 38) then
+    Perform(WM_nextDlgCtl, 1, 0);
+end;
+
+end.

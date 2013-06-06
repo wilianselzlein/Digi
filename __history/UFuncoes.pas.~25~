@@ -1,0 +1,134 @@
+unit UFuncoes;
+
+interface
+
+uses DbClient, DB, Forms, Controls, StdCtrls, Graphics, Dialogs,
+  Windows, Variants, SysUtils, Classes, DBCtrls, Buttons, Vcl.Grids, Vcl.DBGrids;
+
+procedure StatusCDS(ACds: TClientDataSet);
+procedure ChangeDBNav(ADbNav: TDBNavigator; ADataSource: TObject);
+procedure ClickRefresh(ADs: TDataSource);
+function ExecSQL(ASql: String): Variant; overload;
+procedure ExecSQL(ASql: String; AFecha: Boolean); overload;
+procedure GridDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+procedure RemoverVendaTroca(AIdTroca: Integer);
+function ThreadExecSql(ACds: TClientDataSet = nil; ASql: WideString = ''; AParams: TParams = nil; AQry: TSQLQuery = nil): Boolean;
+
+const
+  CAPTIONINPUTBOX = String('Digi');
+
+implementation
+
+uses UPadrao, UDataMod, UThreadExecSql;
+
+procedure StatusCDS(ACds: TClientDataSet);
+begin
+  if ACds.State in [dsEdit, dsinsert] then
+    Exit;
+  if ACds.RecordCount = 0 then
+    ACds.Append
+  else
+    ACds.Edit;
+end;
+
+procedure ChangeDBNav(ADbNav: TDBNavigator; ADataSource: TObject);
+begin
+  with ADbNav do
+  begin
+    Controls[0].Enabled := (TDataSource(ADataSource).State in [dsEdit, dsInsert]);
+    Controls[1].Enabled := Controls[0].Enabled;
+    Controls[2].Enabled := Controls[0].Enabled;
+    Controls[3].Enabled := not Controls[0].Enabled;
+    Controls[4].Enabled := not Controls[0].Enabled;
+    Controls[5].Enabled := Controls[0].Enabled;
+  end;
+end;
+
+procedure ClickRefresh(ADs: TDataSource);
+begin
+  TClientDataSet(Ads.DataSet).Close;
+  TClientDataSet(Ads.DataSet).Open;
+end;
+
+procedure ExecSQL(ASql: String; AFecha: Boolean);
+begin
+  DM.QExec.SQL.Text := ASql;
+  try
+    DM.QExec.ExecSql;
+  except
+    on E: Exception do
+      showmessage(E.Message + #13 + ASql);
+  end;
+  if AFecha then
+    DM.QExec.Close;
+end;
+
+function ExecSQL(ASql: String): Variant;
+begin
+  DM.QExec.SQL.Text := ASql;
+  DM.QExec.Open;
+  Result := DM.QExec.Fields[0].AsVariant;
+  DM.QExec.Close;
+end;
+
+procedure GridDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
+begin
+//  if not odd((Sender as TDBGrid).DataSource.DataSet.RecNo) then
+//    if not (gdSelected in State) then
+//    begin
+//      (Sender as TDBGrid).Canvas.Brush.Color := clMoneyGreen;
+//      (Sender as TDBGrid).Canvas.FillRect(Rect);
+//    end;
+//  (Sender as TDBGrid).DefaultDrawDataCell(Rect, (Sender as TDBGrid).columns[DataCol].field, State);
+end;
+
+procedure RemoverVendaTroca(AIdTroca: Integer);
+begin
+  if not dm.CDSVendaTroca.Active then
+    dm.CDSVendaTroca.Open;
+
+  if dm.CDSVendaTroca.RecordCount > 0 then
+    if dm.CDSVendaTrocaTROCA_ID.AsInteger = AIdTroca then
+      dm.CDSVendaTroca.Delete;
+end;
+
+function ThreadExecSql(ACds: TClientDataSet = nil; ASql: WideString = ''; AParams: TParams = nil; AQry: TSQLQuery = nil): Boolean;
+var
+    NoEvent: TEvento;
+
+    function _ThreadExecSql: TThreadExecSql;
+    var _ExecThread: TThreadExecSql;
+    begin
+        _ExecThread := TThreadExecSql.Create(true);
+        with _ExecThread do
+        begin
+            FreeOnTerminate := true;
+            SqlConnection := Dm.SQLConnection;
+            if ASql <> '' then
+                SQLString := ASql;
+            if AParams <> nil then
+                Params := AParams;
+            if ACds <> nil then
+                ClientDataSet := ACds;
+            if AQry <> nil then
+                SqlQuery := AQry;
+            Priority := tpNormal;
+            DoOnTerminate := NoEvent.ThreadTerminate;
+            Resume;
+        end;
+        Result := _ExecThread;
+    end;
+begin
+    Result := True;
+    try
+        Carregando(True);
+        ExecutandoThread := True;
+        _ThreadExecSql;
+        while ExecutandoThread do
+             Carregando(true);
+    finally
+        Carregando(False);
+    end;
+end;
+
+end.

@@ -1,0 +1,65 @@
+unit UVenda;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.DBLookup, Vcl.StdCtrls, Vcl.Mask,
+  Vcl.DBCtrls, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.ToolWin, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TFVenda = class(TForm)
+    Panel2: TPanel;
+    Panel3: TPanel;
+    Label1: TLabel;
+    DBEdit1: TDBEdit;
+    Label2: TLabel;
+    DBEdit2: TDBEdit;
+    DBLookupCombo1: TDBLookupCombo;
+    ToolBar1: TToolBar;
+    ToolButton1: TToolButton;
+    ToolButton2: TToolButton;
+    ToolButton3: TToolButton;
+    ToolButton4: TToolButton;
+    ToolBar2: TToolBar;
+    ToolButton5: TToolButton;
+    ToolButton6: TToolButton;
+    DBGrid1: TDBGrid;
+    ToolButton7: TToolButton;
+    ToolButton8: TToolButton;
+    Label5: TLabel;
+    txtId: TDBEdit;
+    Label4: TLabel;
+    DBEdit4: TDBEdit;
+    Label6: TLabel;
+    DBEdit5: TDBEdit;
+    Label8: TLabel;
+    Label7: TLabel;
+    ToolButton9: TToolButton;
+    ToolButton10: TToolButton;
+    ToolButton11: TToolButton;
+    DBEdit6: TDBEdit;
+    ToolButton12: TToolButton;
+    DBNav: TDBNavigator;
+    DBEdit3: TDBEdit;
+    Label9: TLabel;
+    DBEdit7: TDBEdit;
+    Label3: TLabel;
+    Label10: TLabel;
+    DBEdit8: TDBEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  FVenda: TFVenda;
+
+implementation
+
+{$R *.dfm}
+
+uses UDataMod;
+
+end.

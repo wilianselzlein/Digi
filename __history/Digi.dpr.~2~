@@ -1,0 +1,16 @@
+program Digi;
+
+uses
+  Vcl.Forms,
+  UMenu in 'UMenu.pas' {Form1},
+  UDataMod in 'UDataMod.pas' {Dm: TDataModule};
+
+{$R *.res}
+
+begin
+  Application.Initialize;
+  Application.MainFormOnTaskbar := True;
+  Application.CreateForm(TForm1, Form1);
+  Application.CreateForm(TDm, Dm);
+  Application.Run;
+end.
