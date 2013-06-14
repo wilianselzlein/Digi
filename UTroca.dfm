@@ -51,18 +51,7 @@ inherited FTroca: TFTroca
         Visible = False
       end>
   end
-  inherited Panel2: TPanel
-    ExplicitWidth = 634
-    inherited txtPesquisa: TEdit
-      ExplicitWidth = 340
-    end
-    inherited DBNav: TDBNavigator
-      ExplicitLeft = 434
-    end
-  end
   inherited Panel1: TPanel
-    ExplicitTop = 239
-    ExplicitWidth = 634
     object Label1: TLabel [1]
       Left = 56
       Top = 28
@@ -76,9 +65,6 @@ inherited FTroca: TFTroca
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
-    end
-    inherited DBNavAcao: TDBNavigator
-      ExplicitWidth = 632
     end
     object DBEdit1: TDBEdit
       Left = 58
@@ -301,6 +287,7 @@ inherited FTroca: TFTroca
       List = True
       ShowCaptions = True
       TabOrder = 3
+      ExplicitTop = 30
       object btnAddVenda: TToolButton
         Left = 0
         Top = 0

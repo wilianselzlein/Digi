@@ -5,7 +5,8 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPadrao, Data.DB, Vcl.Mask, Vcl.DBCtrls,
-  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.DBLookup;
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.DBLookup,
+  Vcl.ComCtrls, Vcl.ToolWin, Datasnap.DBClient;
 
 type
   TFTroca = class(TFPadrao)
@@ -15,11 +16,29 @@ type
     DBEdit1: TDBEdit;
     Label1: TLabel;
     DBMemo1: TDBMemo;
+    Splitter2: TSplitter;
+    Panel3: TPanel;
     Label2: TLabel;
-    DBLookupComboBox1: TDBLookupComboBox;
-    DsVenda: TDataSource;
-    procedure DBGrid1DrawDataCell(Sender: TObject; const Rect: TRect;
-      Field: TField; State: TGridDrawState);
+    Label3: TLabel;
+    DBEdit2: TDBEdit;
+    DBEdit3: TDBEdit;
+    Label6: TLabel;
+    DBEdit4: TDBEdit;
+    Label7: TLabel;
+    Label8: TLabel;
+    DBText1: TDBText;
+    ToolBar1: TToolBar;
+    btnAddVenda: TToolButton;
+    btnDelVenda: TToolButton;
+    ToolButton1: TToolButton;
+    DBGrid2: TDBGrid;
+    DataSource1: TDataSource;
+    ClientDataSet1: TClientDataSet;
+    procedure Imprimir; override;
+    procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+      DataCol: Integer; Column: TColumn; State: TGridDrawState);
+    procedure btnDelVendaClick(Sender: TObject);
+    procedure btnAddVendaClick(Sender: TObject);
   private
     { Private declarations }
   public
@@ -33,10 +52,56 @@ implementation
 
 {$R *.dfm}
 
-uses UDataMod;
+uses UDataMod, UFuncoes, UVenda;
 
-procedure TFTroca.DBGrid1DrawDataCell(Sender: TObject; const Rect: TRect;
-  Field: TField; State: TGridDrawState);
+procedure TFTroca.Imprimir;
+begin
+  with dm.CDSTroca do
+  begin
+    Filtered := False;
+    with FiltroData do
+      Filter := 'DATATROCA >= ' + QuotedStr(DateToStr(Inicial)) + ' AND DATATROCA <= ' + QuotedStr(DateToStr(Final));
+    Filtered := True;
+    dm.frxTroca.ShowReport;
+    Filtered := False;
+  end;
+end;
+
+procedure TFTroca.btnAddVendaClick(Sender: TObject);
+begin
+  inherited;
+  if not dm.CDSVendaTroca.Active then
+    dm.CDSVendaTroca.Open;
+
+  if dm.CDSVendaTroca.RecordCount > 0 then
+    showmessage('Já existe uma venda relacionada a essa troca!')
+  else
+  begin
+    Try
+      if FindWindow(nil, 'Vendas') > 0 then
+        FVenda.Close;
+      FVenda := TFVenda.create(Self);
+      FVenda.FormStyle := fsNormal;
+      FVenda.Visible := False;
+      FVenda.Showmodal;
+      ClientDataSet1.data := dm.CDSVendaTroca.data;
+      showmessage('a');
+      dm.CDSVendaTroca.Append;
+      dm.CDSVendaTroca.post;
+    Finally
+      FreeAndNil(FVenda);
+    End;
+  end
+end;
+
+procedure TFTroca.btnDelVendaClick(Sender: TObject);
+begin
+  inherited;
+  RemoverVendaTroca(dm.CDSTrocaID.AsInteger);
+end;
+
+procedure TFTroca.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
+  DataCol: Integer; Column: TColumn; State: TGridDrawState);
 begin
   inherited;
   GridDrawColumnCell(Sender, Rect, DataCol, Column, State);
