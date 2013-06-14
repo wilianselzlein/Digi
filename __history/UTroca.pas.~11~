@@ -31,9 +31,6 @@ type
     btnAddVenda: TToolButton;
     btnDelVenda: TToolButton;
     ToolButton1: TToolButton;
-    DBGrid2: TDBGrid;
-    DataSource1: TDataSource;
-    ClientDataSet1: TClientDataSet;
     procedure Imprimir; override;
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -56,6 +53,7 @@ uses UDataMod, UFuncoes, UVenda;
 
 procedure TFTroca.Imprimir;
 begin
+  LimpaRelacionamentoTroca;
   with dm.CDSTroca do
   begin
     Filtered := False;
@@ -68,6 +66,7 @@ begin
 end;
 
 procedure TFTroca.btnAddVendaClick(Sender: TObject);
+var lCds: TClientDataSet;
 begin
   inherited;
   if not dm.CDSVendaTroca.Active then
@@ -84,12 +83,17 @@ begin
       FVenda.FormStyle := fsNormal;
       FVenda.Visible := False;
       FVenda.Showmodal;
-      ClientDataSet1.CloneCursor(dm.CDSVendaTroca, true);
-      ClientDataSet1.open;
-      showmessage('a');
-      dm.CDSVendaTroca.Append;
-      dm.CDSVendaTroca.post;
+      lCds := TClientDataSet.Create(nil);
+      lCds.data := dm.CDSVendaTroca.data;
+      if lCds.Locate('VENDA_ID', dm.CDSVendaID.AsInteger, [loPartialKey, loCaseInsensitive]) then
+      begin
+        dm.CDSVendaTroca.Append;
+        dm.CDSVendaTroca.post;
+      end
+      else
+        ShowMessage('Venda já relacionada em outra troca!');
     Finally
+      lCds.Destroy;
       FreeAndNil(FVenda);
     End;
   end

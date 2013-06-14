@@ -23,9 +23,7 @@ type
     Label5: TLabel;
     txtId: TDBEdit;
     Label4: TLabel;
-    txtQuant: TDBEdit;
     Label6: TLabel;
-    txtPreco: TDBEdit;
     Label8: TLabel;
     Label7: TLabel;
     DBNav: TDBNavigator;
@@ -51,6 +49,8 @@ type
     txtTotalTroca: TDBEdit;
     txtTotal: TEdit;
     Label13: TLabel;
+    txtQuant: TEdit;
+    txtPreco: TEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBNavClick(Sender: TObject; Button: TNavigateBtn);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -64,6 +64,8 @@ type
     procedure txtBarraKeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
     procedure FormShow(Sender: TObject);
+    procedure DBNavAcaoClick(Sender: TObject; Button: TNavigateBtn);
+    procedure DBGrid1Enter(Sender: TObject);
   private
     { Private declarations }
     procedure _KeyDown(var Key: Word);
@@ -74,8 +76,6 @@ type
 
 var
   FVendaTroca: TFVendaTroca;
-  lPreco: Double = 0.00;
-  lQuant: Double = 1.00;
 
 implementation
 
@@ -142,6 +142,18 @@ begin
   DSItem.DataSet := Dm.CDSItemVenda;
 end;
 
+procedure TFVendaTroca.DBGrid1Enter(Sender: TObject);
+begin
+  StatusCDS(Dm.CDSVenda);
+end;
+
+procedure TFVendaTroca.DBNavAcaoClick(Sender: TObject; Button: TNavigateBtn);
+begin
+  if Button = nbPost then
+    if dm.CDSTrocaTOTALTROCADO.AsFloat > dm.CDSVendaTOTALVENDIDO.AsFloat * 0.4 then
+      showmessage('O valor da troca (' + dm.CDSTrocaTOTALTROCADO.DisplayText + ') ultrapassou 40% da venda (' + dm.CDSVendaTOTALVENDIDO.DisplayText + ')!');
+end;
+
 procedure TFVendaTroca.DBNavClick(Sender: TObject; Button: TNavigateBtn);
 begin
   if Button = nbRefresh then
@@ -153,12 +165,8 @@ end;
 
 procedure TFVendaTroca.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  Dm.CDSTroca.MasterSource := nil;
-  Dm.CDSTroca.MasterFields := '';
-  Dm.CDSTroca.IndexFieldNames := '';
-
+  LimpaRelacionamentoTroca;
   RelacionaVendaTroca(vtTroca);
-
   Action := Cafree;
 end;
 
@@ -203,15 +211,21 @@ procedure TFVendaTroca.txtBarraKeyDown(Sender: TObject; var Key: Word;
   Shift: TShiftState);
 begin
   if key = VK_INSERT then
-    lQuant := StrToFloatDef(InputBox(CAPTIONINPUTBOX, 'Digite a quantidade a ser inserida:', FloatToStr(lQuant)), lQuant);
+    txtQuant.Text := FloatToStr(StrToFloatDef(InputBox(CAPTIONINPUTBOX, 'Digite a quantidade a ser inserida:', FloatToStr(1)), 1));
   if key = VK_HOME then
-    lPreco := StrToFloatDef(InputBox(CAPTIONINPUTBOX, 'Digite o preço a ser inserido:', FloatToStr(lPreco)), lPreco);
+    txtPreco.Text := FloatToStr(StrToFloatDef(InputBox(CAPTIONINPUTBOX, 'Digite o preço a ser inserido:', FloatToStr(0)), 0));
 end;
 
 procedure TFVendaTroca.txtBarraKeyPress(Sender: TObject; var Key: Char);
 begin
   if key = #13 then
   begin
+    if Trim(txtCliente.Text) = '' then
+    begin
+      txtBarra.Text := 'Selecione o cliente.';
+      txtBarra.SetFocus;
+      Exit;
+    end;
     if not Dm.CDSProduto.Locate('BARRAS', txtBarra.Text, [loCaseInsensitive, loPartialKey]) then
     begin
       txtBarra.Text := 'Produto não localizado.';
@@ -222,18 +236,19 @@ begin
     begin
       dm.CDSItemVenda.Append;
       dm.CDSItemVendaPRODUTOS_ID.AsInteger := dm.CDSProdutoID.AsInteger;
-      dm.CDSItemVendaQUANTIDADE.AsFloat := lQuant;
-      dm.CDSItemVendaPRECO.AsFloat := ifThen(lPreco > 0, lPreco, dm.CDSProdutoPRECO.AsFloat);
+      dm.CDSItemVendaQUANTIDADE.AsFloat := StrToFloatDef(txtQuant.Text, 1);
+      dm.CDSItemVendaPRECO.AsFloat := ifThen(StrToFloatDef(txtPreco.Text, 0) > 0, StrToFloatDef(txtPreco.Text, 0), dm.CDSProdutoPRECO.AsFloat);
       dm.CDSItemVenda.Post;
     end
     else
     begin
+      StatusCDS(DM.CDSVenda);
       if dm.CDSVendaTroca.RecordCount = 0 then
       begin
         RelacionaVendaTroca(vtLivre);
         Dm.CDSVendaTroca.AfterPost := nil;
         dm.CDSVendaTroca.OnNewRecord := nil;
-        dm.CDSVendaTroca.AppendRecord([dm.CDSVendaID.AsInteger, dm.CDSTrocaTMax.Value + 1]);
+        dm.CDSVendaTroca.AppendRecord([dm.CDSVendaID.AsInteger, StrToFloatDef(VarToStr(dm.CDSTrocaTMax.Value),0) + 1]);
         RelacionaVendaTroca(vtVenda);
         dm.CDSVendaTroca.AfterPost := dm.CDSVendaTrocaAfterPost;
         dm.CDSVendaTroca.OnNewRecord := dm.CDSVendaTrocaNewRecord;
@@ -248,12 +263,12 @@ begin
       end;
       dm.CDSItemTroca.Append;
       dm.CDSItemTrocaPRODUTOS_ID.AsInteger := dm.CDSProdutoID.AsInteger;
-      dm.CDSItemTrocaQUANTIDADE.AsFloat := lQuant;
-      dm.CDSItemTrocaPRECO.AsFloat := ifThen(lPreco > 0, lPreco, dm.CDSProdutoPRECO.AsFloat);
+      dm.CDSItemTrocaQUANTIDADE.AsFloat := StrToFloatDef(txtQuant.Text, 1);
+      dm.CDSItemTrocaPRECO.AsFloat := ifThen(StrToFloatDef(txtPreco.Text, 0) > 0, StrToFloatDef(txtPreco.Text, 0), dm.CDSProdutoPRECO.AsFloat);
       dm.CDSItemTroca.Post;
     end;
-    lPreco := 0;
-    lQuant := 1;
+    txtPreco.Clear;
+    txtQuant.Text := '1';
     txtBarra.clear;
     txtbarra.setFocus;
   end;

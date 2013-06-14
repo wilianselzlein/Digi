@@ -84,8 +84,7 @@ begin
       FVenda.Showmodal;
       lCds := TClientDataSet.Create(nil);
       lCds.data := dm.CDSVendaTroca.data;
-      DataSource1.DataSet := lCds;
-      if lCds.Locate('VENDA_ID', dm.CDSVendaID.AsInteger, [loPartialKey, loCaseInsensitive]) then
+      if not lCds.Locate('VENDA_ID', dm.CDSVendaID.AsInteger, [loPartialKey, loCaseInsensitive]) then
       begin
         dm.CDSVendaTroca.Append;
         dm.CDSVendaTroca.post;

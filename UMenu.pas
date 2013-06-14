@@ -180,6 +180,11 @@ end;
 
 procedure TFMenu.btnTrocaClick(Sender: TObject);
 begin
+  if Application.FindComponent('FVendaTroca') <> nil then
+  begin
+    showmessage('Finalize a tela do balcão para continuar!');
+    exit;
+  end;
   if Application.FindComponent('FTroca') = nil then
     Application.CreateForm(TFTroca, FTroca)
   else
@@ -188,6 +193,11 @@ end;
 
 procedure TFMenu.btnVendaClick(Sender: TObject);
 begin
+  if Application.FindComponent('FVendaTroca') <> nil then
+  begin
+    showmessage('Finalize a tela do balcão para continuar!');
+    exit;
+  end;
   if Application.FindComponent('FVenda') = nil then
     Application.CreateForm(TFVenda, FVenda)
   else

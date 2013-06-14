@@ -23,6 +23,7 @@ function ThreadExecSql(ACds: TClientDataSet = nil; ASql: WideString = ''; AParam
 function FiltroData: TFiltro;
 function SomenteNumero(Value: string): string;
 procedure RelacionaVendaTroca(ATipo: TVendaTroca);
+procedure LimpaRelacionamentoTroca;
 
 const
   CAPTIONINPUTBOX = String('Digi');
@@ -179,6 +180,13 @@ begin
     Dm.CDSVendaTroca.MasterFields := 'ID';
     Dm.CDSVendaTroca.IndexFieldNames := 'TROCA_ID';
   end;
+end;
+
+procedure LimpaRelacionamentoTroca;
+begin
+  Dm.CDSTroca.MasterSource := nil;
+  Dm.CDSTroca.MasterFields := '';
+  Dm.CDSTroca.IndexFieldNames := '';
 end;
 
 end.

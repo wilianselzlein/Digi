@@ -145,11 +145,10 @@ object FVendaTroca: TFVendaTroca
     end
     object Label4: TLabel
       Left = 6
-      Top = 107
+      Top = 43
       Width = 38
       Height = 16
       Caption = 'Qtde:'
-      FocusControl = txtQuant
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -158,12 +157,11 @@ object FVendaTroca: TFVendaTroca
       ParentFont = False
     end
     object Label6: TLabel
-      Left = 92
-      Top = 107
+      Left = 95
+      Top = 43
       Width = 46
       Height = 16
       Caption = 'Pre'#231'o:'
-      FocusControl = txtPreco
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -13
@@ -173,11 +171,10 @@ object FVendaTroca: TFVendaTroca
     end
     object Label8: TLabel
       Left = 46
-      Top = 109
+      Top = 45
       Width = 40
       Height = 13
       Caption = '(insert)'
-      FocusControl = txtQuant
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -186,12 +183,11 @@ object FVendaTroca: TFVendaTroca
       ParentFont = False
     end
     object Label7: TLabel
-      Left = 138
-      Top = 109
+      Left = 140
+      Top = 45
       Width = 39
       Height = 13
       Caption = '(home)'
-      FocusControl = txtQuant
       Font.Charset = DEFAULT_CHARSET
       Font.Color = clWindowText
       Font.Height = -11
@@ -201,7 +197,7 @@ object FVendaTroca: TFVendaTroca
     end
     object Label12: TLabel
       Left = 190
-      Top = 64
+      Top = 107
       Width = 18
       Height = 16
       Caption = 'Id:'
@@ -215,7 +211,7 @@ object FVendaTroca: TFVendaTroca
     end
     object Label13: TLabel
       Left = 6
-      Top = 64
+      Top = 107
       Width = 151
       Height = 16
       Caption = 'Produto Selecionado:'
@@ -229,43 +225,25 @@ object FVendaTroca: TFVendaTroca
     end
     object txtId: TDBEdit
       Left = 190
-      Top = 81
+      Top = 124
       Width = 43
       Height = 21
       DataField = 'PRODUTOS_ID'
       DataSource = DSItem
       TabOrder = 0
     end
-    object txtQuant: TDBEdit
-      Left = 6
-      Top = 122
-      Width = 82
-      Height = 21
-      DataField = 'QUANTIDADE'
-      DataSource = DSItem
-      TabOrder = 1
-    end
-    object txtPreco: TDBEdit
-      Left = 92
-      Top = 123
-      Width = 82
-      Height = 21
-      DataField = 'PRECO'
-      DataSource = DSItem
-      TabOrder = 2
-    end
     object txtBarra: TEdit
-      Left = 5
-      Top = 19
+      Left = 6
+      Top = 18
       Width = 171
       Height = 21
-      TabOrder = 3
+      TabOrder = 1
       OnKeyDown = txtBarraKeyDown
       OnKeyPress = txtBarraKeyPress
     end
     object txtProduto: TDBLookupComboBox
       Left = 6
-      Top = 81
+      Top = 124
       Width = 178
       Height = 21
       DataField = 'LKPProduto'
@@ -279,14 +257,12 @@ object FVendaTroca: TFVendaTroca
       Height = 98
       Align = alBottom
       TabOrder = 5
-      ExplicitTop = 148
       object Label9: TLabel
         Left = 6
         Top = 47
         Width = 37
         Height = 16
         Caption = 'Total'
-        FocusControl = txtQuant
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -300,7 +276,6 @@ object FVendaTroca: TFVendaTroca
         Width = 58
         Height = 16
         Caption = 'Vendas:'
-        FocusControl = txtQuant
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -314,7 +289,6 @@ object FVendaTroca: TFVendaTroca
         Width = 54
         Height = 16
         Caption = 'Trocas:'
-        FocusControl = txtQuant
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -354,6 +328,21 @@ object FVendaTroca: TFVendaTroca
         TabOrder = 2
       end
     end
+    object txtQuant: TEdit
+      Left = 6
+      Top = 58
+      Width = 82
+      Height = 21
+      TabOrder = 2
+      Text = '1'
+    end
+    object txtPreco: TEdit
+      Left = 94
+      Top = 58
+      Width = 82
+      Height = 21
+      TabOrder = 3
+    end
   end
   object ToolBar2: TToolBar
     Left = 0
@@ -369,20 +358,20 @@ object FVendaTroca: TFVendaTroca
     List = True
     ShowCaptions = True
     TabOrder = 1
-    object btnVenda: TToolButton
+    object btnTroca: TToolButton
       Left = 0
       Top = 0
-      Caption = 'Venda F12'
-      Down = True
-      ImageIndex = 11
-      OnClick = btnVendaClick
-    end
-    object btnTroca: TToolButton
-      Left = 94
-      Top = 0
       Caption = 'Troca F5'
+      Down = True
       ImageIndex = 9
       OnClick = btnTrocaClick
+    end
+    object btnVenda: TToolButton
+      Left = 94
+      Top = 0
+      Caption = 'Venda F12'
+      ImageIndex = 11
+      OnClick = btnVendaClick
     end
     object ToolButton1: TToolButton
       Left = 188
@@ -437,7 +426,7 @@ object FVendaTroca: TFVendaTroca
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
+    Options = [dgEditing, dgTitles, dgIndicator, dgColumnResize, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit]
     ParentFont = False
     TabOrder = 3
     TitleFont.Charset = DEFAULT_CHARSET
@@ -445,6 +434,7 @@ object FVendaTroca: TFVendaTroca
     TitleFont.Height = -13
     TitleFont.Name = 'MS Sans Serif'
     TitleFont.Style = [fsBold]
+    OnEnter = DBGrid1Enter
     Columns = <
       item
         Expanded = False
@@ -479,6 +469,7 @@ object FVendaTroca: TFVendaTroca
       item
         Expanded = False
         FieldName = 'Total'
+        ReadOnly = True
         Title.Alignment = taRightJustify
         Width = 50
         Visible = True
@@ -510,9 +501,10 @@ object FVendaTroca: TFVendaTroca
     ParentShowHint = False
     ShowHint = True
     TabOrder = 4
+    OnClick = DBNavAcaoClick
   end
   object DSItem: TDataSource
-    DataSet = Dm.CDSItemVenda
+    DataSet = Dm.CDSItemTroca
     Left = 40
     Top = 120
   end

@@ -287,7 +287,6 @@ inherited FTroca: TFTroca
       List = True
       ShowCaptions = True
       TabOrder = 3
-      ExplicitTop = 30
       object btnAddVenda: TToolButton
         Left = 0
         Top = 0

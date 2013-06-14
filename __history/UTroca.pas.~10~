@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPadrao, Data.DB, Vcl.Mask, Vcl.DBCtrls,
   Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Vcl.DBLookup,
-  Vcl.ComCtrls, Vcl.ToolWin;
+  Vcl.ComCtrls, Vcl.ToolWin, Datasnap.DBClient;
 
 type
   TFTroca = class(TFPadrao)
@@ -65,6 +65,7 @@ begin
 end;
 
 procedure TFTroca.btnAddVendaClick(Sender: TObject);
+var lCds: TClientDataSet;
 begin
   inherited;
   if not dm.CDSVendaTroca.Active then
@@ -81,9 +82,17 @@ begin
       FVenda.FormStyle := fsNormal;
       FVenda.Visible := False;
       FVenda.Showmodal;
-      dm.CDSVendaTroca.Append;
-      dm.CDSVendaTroca.post;
+      lCds := TClientDataSet.Create(nil);
+      lCds.data := dm.CDSVendaTroca.data;
+      if lCds.Locate('VENDA_ID', dm.CDSVendaID.AsInteger, [loPartialKey, loCaseInsensitive]) then
+      begin
+        dm.CDSVendaTroca.Append;
+        dm.CDSVendaTroca.post;
+      end
+      else
+        ShowMessage('Venda já relacionada em outra troca!');
     Finally
+      lCds.Destroy;
       FreeAndNil(FVenda);
     End;
   end

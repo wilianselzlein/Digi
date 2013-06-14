@@ -182,6 +182,8 @@ type
     procedure CDSTrocaAfterCancel(DataSet: TDataSet);
     procedure CDSVendaAfterCancel(DataSet: TDataSet);
     procedure CDSVendaBeforeDelete(DataSet: TDataSet);
+    procedure CDSItemTrocaPRODUTOS_IDChange(Sender: TField);
+    procedure CDSItemVendaPRODUTOS_IDChange(Sender: TField);
   private
     { Private declarations }
   public
@@ -231,6 +233,11 @@ begin
   CDSItemTrocaTROCA_ID.AsInteger := CDSTrocaID.AsInteger;
 end;
 
+procedure TDm.CDSItemTrocaPRODUTOS_IDChange(Sender: TField);
+begin
+  CDSItemTrocaPRECO.AsFloat := CDSProdutoPRECO.AsFloat;
+end;
+
 procedure TDm.CDSItemVendaAfterDelete(DataSet: TDataSet);
 begin
   StatusCDS(CDSVenda);
@@ -249,6 +256,11 @@ begin
   CDSItemVendaITEM.AsInteger := StrToIntDef(VarToStr(CDSItemVendaTMax.Value),0)+1;
   CDSItemVendaVENDA_ID.AsInteger := CDSVendaID.AsInteger;
   CDSItemVendaQUANTIDADE.AsInteger := 1;
+end;
+
+procedure TDm.CDSItemVendaPRODUTOS_IDChange(Sender: TField);
+begin
+  CDSItemVendaPRECO.AsFloat := CDSProdutoPRECO.AsFloat;
 end;
 
 procedure TDm.CDSProdutoAfterDelete(DataSet: TDataSet);
@@ -306,6 +318,8 @@ end;
 procedure TDm.CDSVendaAfterDelete(DataSet: TDataSet);
 begin
   CDSVenda.ApplyUpdates(0);
+  CDSTroca.Close;
+  CDSTroca.Open;
 end;
 
 procedure TDm.CDSVendaAfterPost(DataSet: TDataSet);
@@ -315,8 +329,16 @@ end;
 
 procedure TDm.CDSVendaBeforeDelete(DataSet: TDataSet);
 begin
-  if application.messagebox('Ao excluir a venda, será também excluido a(s) relação(ões) com a troca. Deseja continuar?', PChar(CAPTIONINPUTBOX), mb_yesno + MB_ICONQUESTION) = mrno then
-    abort;
+  if application.messagebox('Ao excluir a venda, será também excluido a(s) relação(ões) com a troca e a troca. Deseja continuar?', PChar(CAPTIONINPUTBOX), mb_yesno + MB_ICONQUESTION) = mrno then
+    abort
+  else
+  begin
+    if (Dm.CDSVendaTrocaTROCA_ID.AsInteger > 0) and (Dm.CDSTrocaID.AsInteger = Dm.CDSVendaTrocaTROCA_ID.AsInteger) then
+    begin
+      ExecSQL('DELETE FROM VENDATROCA WHERE TROCA_ID = ' + dm.CDSVendaTrocaTROCA_ID.AsString, True);
+      ExecSQL('DELETE FROM TROCA WHERE ID = ' + dm.CDSVendaTrocaTROCA_ID.AsString, True);
+    end;
+  end;
 end;
 
 procedure TDm.CDSVendaNewRecord(DataSet: TDataSet);
