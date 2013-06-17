@@ -1,5 +1,6 @@
 inherited FProduto: TFProduto
   Caption = 'Produtos'
+  OnCreate = FormCreate
   PixelsPerInch = 96
   TextHeight = 13
   inherited DBGrid: TDBGrid
@@ -24,13 +25,14 @@ inherited FProduto: TFProduto
         Expanded = False
         FieldName = 'NOME'
         Title.Caption = 'Nome'
-        Width = 150
+        Width = 137
         Visible = True
       end
       item
         Expanded = False
         FieldName = 'BARRAS'
         Title.Caption = 'Barras'
+        Width = 102
         Visible = True
       end
       item
@@ -38,6 +40,15 @@ inherited FProduto: TFProduto
         FieldName = 'PRECO'
         Title.Alignment = taRightJustify
         Title.Caption = 'Pre'#231'o'
+        Width = 80
+        Visible = True
+      end
+      item
+        Expanded = False
+        FieldName = 'ESTOQUE'
+        Title.Alignment = taRightJustify
+        Title.Caption = 'Estoque'
+        Width = 81
         Visible = True
       end>
   end

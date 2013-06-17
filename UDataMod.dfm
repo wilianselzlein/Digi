@@ -37,6 +37,12 @@ object Dm: TDm
       Precision = 18
       Size = 4
     end
+    object CDSProdutoESTOQUE: TFMTBCDField
+      FieldName = 'ESTOQUE'
+      DisplayFormat = '0'
+      Precision = 18
+      Size = 4
+    end
     object CDSProdutoTMax: TAggregateField
       FieldName = 'TMax'
       Visible = True
@@ -52,7 +58,7 @@ object Dm: TDm
     Left = 104
     Top = 16
     Bitmap = {
-      494C01010F002401240110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010F002801280110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -593,7 +599,7 @@ object Dm: TDm
     Left = 168
     Top = 16
     Bitmap = {
-      494C01010900AC01AC0120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010900B001B00120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       000000000000000000000000000000000000F4F7F0107EB455BF539C1EFF539C
       1EFF539C1EFF539C1EFF539C1EFF539C1EFF539C1EFF539C1EFF79B548FFFFFF
@@ -2261,6 +2267,11 @@ object Dm: TDm
       Precision = 18
       Size = 4
     end
+    object QProdutoESTOQUE: TFMTBCDField
+      FieldName = 'ESTOQUE'
+      Precision = 18
+      Size = 4
+    end
   end
   object DSPProduto: TDataSetProvider
     DataSet = QProduto
@@ -2930,9 +2941,9 @@ object Dm: TDm
             '[frxDBProduto."ID"]')
         end
         object frxDBProdutoBARRAS: TfrxMemoView
-          Align = baRight
-          Left = 472.063297000000100000
-          Width = 136.063080000000000000
+          Align = baLeft
+          Left = 396.850650000000100000
+          Width = 139.842610000000000000
           Height = 18.897650000000000000
           ShowHint = False
           DataSet = frxDBProduto
@@ -2948,8 +2959,8 @@ object Dm: TDm
         end
         object frxDBProdutoPRECO: TfrxMemoView
           Align = baRight
-          Left = 608.126377000000000000
-          Width = 132.283550000000000000
+          Left = 638.362617000000000000
+          Width = 102.047310000000000000
           Height = 18.897650000000000000
           ShowHint = False
           DataSet = frxDBProduto
@@ -2969,7 +2980,7 @@ object Dm: TDm
         object frxDBProdutoDESCRICAO: TfrxMemoView
           Align = baLeft
           Left = 41.574830000000000000
-          Width = 215.433210000000000000
+          Width = 177.637910000000000000
           Height = 18.897650000000000000
           ShowHint = False
           DataSet = frxDBProduto
@@ -2985,8 +2996,8 @@ object Dm: TDm
         end
         object frxDBProdutoNOME: TfrxMemoView
           Align = baLeft
-          Left = 257.008040000000000000
-          Width = 215.433210000000000000
+          Left = 219.212740000000000000
+          Width = 177.637910000000000000
           Height = 18.897650000000000000
           ShowHint = False
           DataSet = frxDBProduto
@@ -2999,6 +3010,27 @@ object Dm: TDm
           Highlight.Condition = '<frxDBProduto."ID"> mod 2'
           Memo.UTF8W = (
             '[frxDBProduto."NOME"]')
+        end
+        object Memo10: TfrxMemoView
+          Align = baRight
+          Left = 536.315306999999900000
+          Width = 102.047310000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'ESTOQUE'
+          DataSet = frxDBProduto
+          DataSetName = 'frxDBProduto'
+          DisplayFormat.FormatStr = '%g'
+          DisplayFormat.Kind = fkNumeric
+          HAlign = haRight
+          Highlight.Font.Charset = DEFAULT_CHARSET
+          Highlight.Font.Color = clBlack
+          Highlight.Font.Height = -13
+          Highlight.Font.Name = 'Arial'
+          Highlight.Font.Style = []
+          Highlight.Condition = '<frxDBProduto."ID"> mod 2'
+          Memo.UTF8W = (
+            '[frxDBProduto."ESTOQUE"]')
         end
       end
       object PageFooter1: TfrxPageFooter
@@ -3044,9 +3076,9 @@ object Dm: TDm
           ParentFont = False
         end
         object Memo7: TfrxMemoView
-          Align = baRight
-          Left = 472.063297000000100000
-          Width = 136.063080000000000000
+          Align = baLeft
+          Left = 396.850650000000100000
+          Width = 139.842610000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -3061,8 +3093,8 @@ object Dm: TDm
         end
         object Memo8: TfrxMemoView
           Align = baRight
-          Left = 608.126377000000000000
-          Width = 132.283550000000000000
+          Left = 638.362617000000000000
+          Width = 102.047310000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -3079,7 +3111,7 @@ object Dm: TDm
         object Memo4: TfrxMemoView
           Align = baLeft
           Left = 41.574830000000000000
-          Width = 215.433210000000000000
+          Width = 177.637910000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -3094,8 +3126,8 @@ object Dm: TDm
         end
         object Memo5: TfrxMemoView
           Align = baLeft
-          Left = 257.008040000000000000
-          Width = 215.433210000000000000
+          Left = 219.212740000000000000
+          Width = 177.637910000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -3106,6 +3138,23 @@ object Dm: TDm
           Frame.Typ = [ftBottom]
           Memo.UTF8W = (
             'Nome')
+          ParentFont = False
+        end
+        object Memo9: TfrxMemoView
+          Align = baRight
+          Left = 536.315306999999900000
+          Width = 102.047310000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          Frame.Typ = [ftBottom]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Estoque')
           ParentFont = False
         end
       end

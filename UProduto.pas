@@ -15,12 +15,14 @@ type
     FBarra: String;
     FPreco: String;
     FCodigo: String;
+    FEstoque: String;
   public
     property Descricao: String read FDescricao write FDescricao;
     property Nome: String read FNome write FNome;
     property Barra: String read FBarra write FBarra;
     property Preco: String read FPreco write FPreco;
     property Codigo: String read FCodigo write FCodigo;
+    property Estoque: String read FEstoque write FEstoque;
   end;
   TProdutos = class (TCollection)
   private
@@ -42,6 +44,7 @@ type
     Label6: TLabel;
     procedure Importar; override;
     procedure Imprimir; override;
+    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
   public
@@ -58,6 +61,13 @@ implementation
 uses UDataMod, UFuncoes;
 
 { TFProduto }
+
+procedure TFProduto.FormCreate(Sender: TObject);
+begin
+  inherited;
+  dm.CDSProduto.Close;
+  dm.CDSProduto.Open; //Para atualizar o estoque
+end;
 
 procedure TFProduto.Importar;
 Var
@@ -78,6 +88,7 @@ begin
         Barra := ChildNodes['BARRAS'].Text;
         Preco := ChildNodes['PRECO_CONSUMIDOR'].Text;
         Codigo := ChildNodes['CODIGO'].Text;
+        Estoque := ChildNodes['QTD_ESTOQUE'].Text;
       end;
     end;
     Prods.Gravar;
@@ -124,6 +135,7 @@ begin
       dm.CDSProdutoNOME.AsString := Nome;
       dm.CDSProdutoBARRAS.AsString := Barra;
       dm.CDSProdutoPRECO.AsFloat := StrToFloatDef(SomenteNumero(Preco),0.00) / 100;
+      dm.CDSProdutoESTOQUE.AsFloat := StrToFloatDef(SomenteNumero(Estoque),0.00) / 100;
       dm.CDSProduto.Post;
     end;
   end;

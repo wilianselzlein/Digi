@@ -153,6 +153,8 @@ type
     SavePictureDialog: TSavePictureDialog;
     frxVendaTroca: TfrxReport;
     XMLDoc: TXMLDocument;
+    QProdutoESTOQUE: TFMTBCDField;
+    CDSProdutoESTOQUE: TFMTBCDField;
     procedure CDSProdutoAfterDelete(DataSet: TDataSet);
     procedure CDSProdutoAfterPost(DataSet: TDataSet);
     procedure CDSProdutoNewRecord(DataSet: TDataSet);
@@ -384,11 +386,43 @@ begin
     ExecSQL('ALTER TABLE VERSAO ADD CONSTRAINT PK_VERSAO PRIMARY KEY (ID);', True);
     ExecSQL('INSERT INTO VERSAO (ID) VALUES (1);', True);
   end;
-  if v < 1 then
+  if v < 2 then
+    ExecSQL('ALTER TABLE PRODUTOS ADD ESTOQUE NUMERIC(15,4) DEFAULT 0;', True);
+  if v < 3 then
   begin
-//    ExecSQL('ALTER TABLE ... ;', True);
+    ExecSQL(
+      ' CREATE OR ALTER TRIGGER ALTITEMTROCA FOR ITEMTROCA ACTIVE BEFORE UPDATE POSITION 0 as ' + #13 +
+      ' Begin ' + #13 +
+      '   Update Produtos Set Estoque = Estoque - Old.Quantidade + New.Quantidade where Id = Old.Produtos_Id; ' + #13 +
+      ' end', True);
+    ExecSQL(
+      ' CREATE OR ALTER TRIGGER DELITEMTROCA FOR ITEMTROCA ACTIVE AFTER DELETE POSITION 0 as ' + #13 +
+      ' Begin ' + #13 +
+      '   Update Produtos Set Estoque = Estoque - Old.Quantidade where Id = Old.Produtos_Id; ' + #13 +
+      ' end', True);
+    ExecSQL(
+      ' CREATE OR ALTER TRIGGER INSITEMTROCA FOR ITEMTROCA ACTIVE AFTER INSERT POSITION 0 as ' + #13 +
+      ' Begin ' + #13 +
+      '   Update Produtos Set Estoque = Estoque + New.Quantidade where Id = New.Produtos_Id; ' + #13 +
+      ' end', True);
+
+    ExecSQL(
+      ' CREATE OR ALTER TRIGGER ALTITEMVENDA FOR ITEMVENDA ACTIVE BEFORE UPDATE POSITION 0 as ' + #13 +
+      ' Begin ' + #13 +
+      '   Update Produtos Set Estoque = Estoque + Old.Quantidade - New.Quantidade where Id = Old.Produtos_Id; ' + #13 +
+      ' end', True);
+    ExecSQL(
+      ' CREATE OR ALTER TRIGGER DELITEMVENDA FOR ITEMVENDA ACTIVE AFTER DELETE POSITION 0 as ' + #13 +
+      ' Begin ' + #13 +
+      '   Update Produtos Set Estoque = Estoque + Old.Quantidade where Id = Old.Produtos_Id; ' + #13 +
+      ' end', True);
+    ExecSQL(
+      ' CREATE OR ALTER TRIGGER INSITEMVENDA FOR ITEMVENDA ACTIVE AFTER INSERT POSITION 0 as ' + #13 +
+      ' Begin ' + #13 +
+      '   Update Produtos Set Estoque = Estoque - New.Quantidade where Id = New.Produtos_Id; ' + #13 +
+      ' end', True);
   end;
-  ExecSQL('UPDATE VERSAO SET ID = 1;', True);
+  ExecSQL('UPDATE VERSAO SET ID = 3;', True);
 end;
 
 end.
