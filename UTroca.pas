@@ -36,6 +36,9 @@ type
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure btnDelVendaClick(Sender: TObject);
     procedure btnAddVendaClick(Sender: TObject);
+    procedure DBGrid1EditButtonClick(Sender: TObject);
+    procedure DBGrid1KeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -49,7 +52,7 @@ implementation
 
 {$R *.dfm}
 
-uses UDataMod, UFuncoes, UVenda;
+uses UDataMod, UFuncoes, UVenda, UProduto;
 
 procedure TFTroca.Imprimir;
 begin
@@ -86,6 +89,7 @@ begin
       lCds.data := dm.CDSVendaTroca.data;
       if not lCds.Locate('VENDA_ID', dm.CDSVendaID.AsInteger, [loPartialKey, loCaseInsensitive]) then
       begin
+        TesteValorVendaTroca;
         dm.CDSVendaTroca.Append;
         dm.CDSVendaTroca.post;
       end
@@ -93,7 +97,7 @@ begin
         ShowMessage('Venda já relacionada em outra troca!');
     Finally
       lCds.Destroy;
-      FreeAndNil(FVenda);
+      //FVenda.Free;
     End;
   end
 end;
@@ -109,6 +113,21 @@ procedure TFTroca.DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
 begin
   inherited;
   GridDrawColumnCell(Sender, Rect, DataCol, Column, State);
+end;
+
+procedure TFTroca.DBGrid1EditButtonClick(Sender: TObject);
+begin
+  inherited;
+  StatusCDS(dm.CDSItemTroca);
+  DM.CDSItemTrocaPRODUTOS_ID.AsInteger := FProduto.ConsultaProduto;
+end;
+
+procedure TFTroca.DBGrid1KeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+  if key = VK_F9 then
+    DBGrid1EditButtonClick(nil);
 end;
 
 end.

@@ -186,6 +186,7 @@ type
     procedure CDSVendaBeforeDelete(DataSet: TDataSet);
     procedure CDSItemTrocaPRODUTOS_IDChange(Sender: TField);
     procedure CDSItemVendaPRODUTOS_IDChange(Sender: TField);
+    procedure CDSItemVendaBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -244,6 +245,15 @@ procedure TDm.CDSItemVendaAfterDelete(DataSet: TDataSet);
 begin
   StatusCDS(CDSVenda);
   CDSVendaTOTALVENDIDO.AsFloat := StrToFloatDef(VarToStr(CDSItemVendaTTotal.Value), 0);
+end;
+
+procedure TDm.CDSItemVendaBeforePost(DataSet: TDataSet);
+begin
+  if CDSItemVendaQUANTIDADE.AsFloat > GetEstoque(CDSItemVendaPRODUTOS_ID.AsInteger) then //ver possibilidade de localizar na troca
+  begin
+    raise Exception.Create('Estoque insuficiente para essa venda!');
+    Abort;
+  end;
 end;
 
 procedure TDm.CDSItemVendaCalcFields(DataSet: TDataSet);

@@ -1,0 +1,160 @@
+unit UProduto;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, UPadrao, Data.DB, Vcl.Mask, Vcl.DBCtrls,
+  Vcl.StdCtrls, Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids;
+
+type
+  TProduto = class(TCollectionItem)
+  private
+    FDescricao: String;
+    FNome: String;
+    FBarra: String;
+    FPreco: String;
+    FCodigo: String;
+    FEstoque: String;
+  public
+    property Descricao: String read FDescricao write FDescricao;
+    property Nome: String read FNome write FNome;
+    property Barra: String read FBarra write FBarra;
+    property Preco: String read FPreco write FPreco;
+    property Codigo: String read FCodigo write FCodigo;
+    property Estoque: String read FEstoque write FEstoque;
+  end;
+  TProdutos = class (TCollection)
+  private
+    function GetItem(Index: Integer): TProduto;
+  public
+    function Add: TProduto;
+    property Item[Index: Integer]: TProduto read GetItem;
+    procedure Gravar;
+  end;
+
+  TFProduto = class(TFPadrao)
+    DBEdit1: TDBEdit;
+    Label1: TLabel;
+    DBEdit2: TDBEdit;
+    Label2: TLabel;
+    DBEdit3: TDBEdit;
+    Label3: TLabel;
+    DBEdit4: TDBEdit;
+    Label6: TLabel;
+    procedure Importar; override;
+    procedure Imprimir; override;
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+    function ConsultaProduto: Integer;
+  end;
+
+var
+  FProduto: TFProduto;
+
+implementation
+
+{$R *.dfm}
+
+uses UDataMod, UFuncoes;
+
+{ TFProduto }
+
+function TFProduto.ConsultaProduto: Integer;
+begin
+  try
+    FProduto := TFProduto.Create(Self);
+    FProduto.FormStyle := fsNormal;
+    FProduto.Visible := False;
+    FProduto.ShowModal;
+
+    AField := dm.CDSProdutoID.AsInteger;
+  finally
+    FProduto.Release;
+    FreeAndNil(FProduto);
+  end;
+end;
+
+procedure TFProduto.FormCreate(Sender: TObject);
+begin
+  inherited;
+  dm.CDSProduto.Close;
+  dm.CDSProduto.Open; //Para atualizar o estoque
+end;
+
+procedure TFProduto.Importar;
+Var
+  Prods: TProdutos;
+  I : Integer;
+begin
+  if not dm.OpenDialog.Execute then
+    Exit;
+  dm.XMLDoc.LoadFromFile(dm.OpenDialog.FileName);
+  Prods := TProdutos.Create(TProduto);
+  try
+    for I := 0 to dm.XMLDoc.DocumentElement.ChildNodes.Count - 1 do
+    begin
+      with Prods.Add, dm.XMLDoc, dm.XMLDoc.DocumentElement.ChildNodes[I] do
+      begin
+        Descricao := ChildNodes['DESCRICAO'].Text;
+        Nome := ChildNodes['NOME'].Text;
+        Barra := ChildNodes['BARRAS'].Text;
+        Preco := ChildNodes['PRECO_CONSUMIDOR'].Text;
+        Codigo := ChildNodes['CODIGO'].Text;
+        Estoque := ChildNodes['QTD_ESTOQUE'].Text;
+      end;
+    end;
+    Prods.Gravar;
+  finally
+    dm.XMLDoc.XML.Clear;
+    Prods.Destroy;
+  end;
+end;
+
+procedure TFProduto.Imprimir;
+begin
+  dm.frxProduto.ShowReport;
+end;
+
+{ TProdutos }
+
+function TProdutos.Add: TProduto;
+begin
+  Result := inherited Add as TProduto;
+end;
+
+function TProdutos.GetItem(Index: Integer): TProduto;
+begin
+  Result := inherited Items[Index] as TProduto;
+end;
+
+procedure TProdutos.Gravar;
+var i: integer;
+begin
+  for i := 0 to Count - 1 do
+  begin
+    with Item[i] do
+    begin
+      Codigo := IntToStr(StrToIntDef(Codigo, 0));
+      dm.CDSProduto.IndexFieldNames := 'ID';
+      if dm.CDSProduto.Locate('ID', Codigo, [loCaseInsensitive, loPartialKey]) then
+        dm.CDSProduto.Edit
+      else
+      begin
+        dm.CDSProduto.Append;
+        dm.CDSProdutoID.AsInteger := StrToInt(Codigo);
+      end;
+      dm.CDSProdutoDESCRICAO.AsString := Descricao;
+      dm.CDSProdutoNOME.AsString := Nome;
+      dm.CDSProdutoBARRAS.AsString := Barra;
+      dm.CDSProdutoPRECO.AsFloat := StrToFloatDef(SomenteNumero(Preco),0.00) / 100;
+      dm.CDSProdutoESTOQUE.AsFloat := StrToFloatDef(SomenteNumero(Estoque),0.00) / 100;
+      dm.CDSProduto.Post;
+    end;
+  end;
+end;
+
+end.

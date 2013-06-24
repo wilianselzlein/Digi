@@ -49,6 +49,7 @@ type
     { Private declarations }
   public
     { Public declarations }
+    function ConsultaProduto(AField: String = ''): Variant;
   end;
 
 var
@@ -61,6 +62,24 @@ implementation
 uses UDataMod, UFuncoes;
 
 { TFProduto }
+
+function TFProduto.ConsultaProduto(AField: String = ''): Variant;
+begin
+  try
+    FProduto := TFProduto.Create(Self);
+    FProduto.FormStyle := fsNormal;
+    FProduto.Visible := False;
+    FProduto.ShowModal;
+
+    if AField <> '' then
+      Result := dm.CDSProduto.FieldByName(AField).Value
+    else
+      Result := dm.CDSProdutoID.AsInteger;
+  finally
+    FProduto.Release;
+    FreeAndNil(FProduto);
+  end;
+end;
 
 procedure TFProduto.FormCreate(Sender: TObject);
 begin

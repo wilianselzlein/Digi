@@ -67,6 +67,7 @@ object FVendaTroca: TFVendaTroca
       Height = 21
       DataField = 'DATAVENDA'
       DataSource = Dm.DSVenda
+      MaxLength = 10
       TabOrder = 0
     end
     object DBNav: TDBNavigator
@@ -127,8 +128,6 @@ object FVendaTroca: TFVendaTroca
     Color = clMoneyGreen
     ParentBackground = False
     TabOrder = 2
-    ExplicitLeft = 418
-    ExplicitTop = 49
     object Label5: TLabel
       Left = 6
       Top = 4
@@ -208,6 +207,7 @@ object FVendaTroca: TFVendaTroca
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
     end
     object Label13: TLabel
       Left = 6
@@ -222,6 +222,7 @@ object FVendaTroca: TFVendaTroca
       Font.Name = 'MS Sans Serif'
       Font.Style = [fsBold]
       ParentFont = False
+      Visible = False
     end
     object txtId: TDBEdit
       Left = 190
@@ -231,6 +232,7 @@ object FVendaTroca: TFVendaTroca
       DataField = 'PRODUTOS_ID'
       DataSource = DSItem
       TabOrder = 0
+      Visible = False
     end
     object txtBarra: TEdit
       Left = 6
@@ -249,6 +251,7 @@ object FVendaTroca: TFVendaTroca
       DataField = 'LKPProduto'
       DataSource = DSItem
       TabOrder = 4
+      Visible = False
     end
     object Panel1: TPanel
       Left = 0

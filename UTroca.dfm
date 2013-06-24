@@ -110,9 +110,12 @@ inherited FTroca: TFTroca
     TitleFont.Name = 'MS Sans Serif'
     TitleFont.Style = [fsBold]
     OnDrawColumnCell = DBGrid1DrawColumnCell
+    OnEditButtonClick = DBGrid1EditButtonClick
+    OnKeyDown = DBGrid1KeyDown
     Columns = <
       item
         Alignment = taCenter
+        ButtonStyle = cbsEllipsis
         Expanded = False
         FieldName = 'ITEM'
         ReadOnly = True

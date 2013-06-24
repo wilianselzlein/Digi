@@ -115,17 +115,8 @@ end;
 
 procedure TFVendaTroca.btnProdutoClick(Sender: TObject);
 begin
-  try
-    FProduto := TFProduto.Create(Self);
-    FProduto.FormStyle := fsNormal;
-    FProduto.Visible := False;
-    FProduto.ShowModal;
-    txtBarra.Text := dm.CDSProdutoBARRAS.AsString;
-    txtBarra.SetFocus;
-  finally
-    FProduto.Release;
-    FreeAndNil(FProduto);
-  end;
+  TxtBarra.Text := FProduto.ConsultaProduto(dm.CDSProdutoBARRAS.FieldName);
+  txtBarra.SetFocus;
 end;
 
 procedure TFVendaTroca.btnTrocaClick(Sender: TObject);
@@ -149,9 +140,10 @@ end;
 
 procedure TFVendaTroca.DBNavAcaoClick(Sender: TObject; Button: TNavigateBtn);
 begin
-  if Button = nbPost then
-    if dm.CDSTrocaTOTALTROCADO.AsFloat > dm.CDSVendaTOTALVENDIDO.AsFloat * 0.4 then
-      showmessage('O valor da troca (' + dm.CDSTrocaTOTALTROCADO.DisplayText + ') ultrapassou 40% da venda (' + dm.CDSVendaTOTALVENDIDO.DisplayText + ')!');
+  case Button of
+    nbPost: TesteValorVendaTroca;
+    nbInsert: txtClienteId.SetFocus;
+  end;
 end;
 
 procedure TFVendaTroca.DBNavClick(Sender: TObject; Button: TNavigateBtn);
