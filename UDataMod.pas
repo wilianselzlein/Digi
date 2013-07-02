@@ -355,8 +355,12 @@ end;
 
 procedure TDm.CDSVendaNewRecord(DataSet: TDataSet);
 begin
-  CDSVendaID.AsInteger := StrToIntDef(VarToStr(DM.CDSVendaTMax.Value),0)+1;
   CDSVendaDATAVENDA.AsDateTime := Date;
+  try
+    CDSVendaID.AsInteger := StrToIntDef(VarToStr(DM.CDSVendaTMax.Value),0)+1;
+  except
+    CDSVendaID.AsInteger := ExecSQL('SELECT COALESCE(MAX(ID),0) FROM VENDA') + 1;
+  end;
 end;
 
 procedure TDm.CDSVendaTrocaAfterDelete(DataSet: TDataSet);

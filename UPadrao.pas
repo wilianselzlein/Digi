@@ -5,7 +5,7 @@ interface
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.Mask, Vcl.DBCtrls, Vcl.StdCtrls, DBClient,
-  Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Data.DB;
+  Vcl.ExtCtrls, Vcl.Grids, Vcl.DBGrids, Data.DB, IniFiles;
 
 type
   TFPadrao = class(TForm)
@@ -107,6 +107,10 @@ begin
 end;
 
 procedure TFPadrao.FormShow(Sender: TObject);
+var ArqIni: tIniFile;
+const
+  CONFIG: String = 'Config.ini';
+  SECAO: String = 'ORDER';
 begin
   txtPesquisa.SetFocus;
   if not DataSource.DataSet.Active then
@@ -116,6 +120,15 @@ begin
   Self.Top := (FMenu.Height - 210 - Self.Height) div 2;
   Self.Width := 650;
   Self.Height := 350;
+
+  ArqIni := tIniFile.Create(IncludeTrailingBackslash(ExtractFilePath(Application.ExeName)) + CONFIG);
+  try
+    if ArqIni.ReadString(SECAO, Self.Name, '') = '' then
+      ArqIni.writeString(SECAO, Self.Name, TClientDataSet(DataSource.DataSet).IndexFieldNames);
+    TClientDataSet(DataSource.DataSet).IndexFieldNames := ArqIni.ReadString(SECAO, Self.Name, TClientDataSet(DataSource.DataSet).IndexFieldNames);
+  finally
+    ArqIni.Free;
+  end;
 end;
 
 procedure TFPadrao.txtPesquisaChange(Sender: TObject);
