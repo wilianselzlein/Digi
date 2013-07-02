@@ -69,6 +69,7 @@ type
     procedure btnGrafExportClick(Sender: TObject);
     procedure btnGrafAtuClick(Sender: TObject);
     procedure FormCreate(Sender: TObject);
+    procedure Splitter1Moved(Sender: TObject);
   private
     { Private declarations }
     function GetChart(APrimeiro: boolean = True): TDBChart;
@@ -139,7 +140,7 @@ end;
 
 procedure TFMenu.btnGrafFechaClick(Sender: TObject);
 begin
-  PanGraf.Visible := False;
+  PanGraf.Height := 5;
 end;
 
 procedure TFMenu.btnGrafPrintClick(Sender: TObject);
@@ -227,6 +228,11 @@ begin
     1: if APrimeiro then Result := DBChart1 else Result := DBChart2;
     2: Result := DBChart5;
   end;
+end;
+
+procedure TFMenu.Splitter1Moved(Sender: TObject);
+begin
+  toolbar1.Align := alRight;
 end;
 
 end.

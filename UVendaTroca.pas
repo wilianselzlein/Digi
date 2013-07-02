@@ -115,7 +115,7 @@ end;
 
 procedure TFVendaTroca.btnProdutoClick(Sender: TObject);
 begin
-  TxtBarra.Text := FProduto.ConsultaProduto(dm.CDSProdutoBARRAS.FieldName);
+  TxtBarra.Text := ConsultaProduto(dm.CDSProdutoBARRAS.FieldName);
   txtBarra.SetFocus;
 end;
 
@@ -268,16 +268,15 @@ end;
 
 procedure TFVendaTroca._KeyDown(var Key: Word);
 begin
-  if key = vk_f12 then
-    btnVenda.Click;
-  if key = vk_f5 then
-    btnTroca.Click;
-  if key = VK_F10 then
-    btnCliente.Click;
-  if key = VK_F11 then
-    btnConsulta.Click;
-  if key = vk_f9 then
-    btnProduto.Click;
+  case Key of
+    VK_F5: DBNavAcaoClick(DBNavAcao, nbInsert);
+    //VK_F6: DBNavAcaoClick(DBNavAcao, nbEdit);
+    VK_F7: DBNavAcaoClick(DBNavAcao, nbPost);
+    VK_F8: DBNavAcaoClick(DBNavAcao, nbDelete);
+    VK_F10: btnCliente.Click;
+    VK_F11: btnConsulta.Click;
+    VK_f9: btnProduto.Click;
+  end;
   if ActiveControl <> txtBarra then
   begin
     if key = VK_INSERT then

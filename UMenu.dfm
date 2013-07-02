@@ -3,7 +3,7 @@ object FMenu: TFMenu
   Top = 0
   Caption = 'FMenu'
   ClientHeight = 422
-  ClientWidth = 696
+  ClientWidth = 731
   Color = clWhite
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -22,21 +22,23 @@ object FMenu: TFMenu
   object Splitter1: TSplitter
     Left = 0
     Top = 242
-    Width = 696
+    Width = 731
     Height = 3
     Cursor = crVSplit
     Align = alBottom
+    OnMoved = Splitter1Moved
     ExplicitLeft = 25
     ExplicitTop = 211
+    ExplicitWidth = 696
   end
   object ToolBarMenu: TToolBar
     Left = 0
     Top = 0
-    Width = 696
+    Width = 731
     Height = 38
     AutoSize = True
     ButtonHeight = 38
-    ButtonWidth = 111
+    ButtonWidth = 117
     Caption = 'ToolBarMenu'
     DrawingStyle = dsGradient
     Font.Charset = DEFAULT_CHARSET
@@ -64,15 +66,15 @@ object FMenu: TFMenu
       OnClick = btnClienteClick
     end
     object btnProduto: TToolButton
-      Left = 111
+      Left = 117
       Top = 0
       Hint = 'Produtos'
-      Caption = '&Produtos F7'
+      Caption = '&Produtos F6'
       ImageIndex = 1
       OnClick = btnProdutoClick
     end
     object ToolButton2: TToolButton
-      Left = 222
+      Left = 234
       Top = 0
       Width = 8
       Caption = 'ToolButton2'
@@ -80,7 +82,7 @@ object FMenu: TFMenu
       Style = tbsSeparator
     end
     object btnVenda: TToolButton
-      Left = 230
+      Left = 242
       Top = 0
       Hint = 'Vendas'
       Caption = '&Vendas F1'
@@ -88,14 +90,14 @@ object FMenu: TFMenu
       OnClick = btnVendaClick
     end
     object btnTroca: TToolButton
-      Left = 341
+      Left = 359
       Top = 0
       Caption = '&Trocas F2'
       ImageIndex = 4
       OnClick = btnTrocaClick
     end
     object ToolButton4: TToolButton
-      Left = 452
+      Left = 476
       Top = 0
       Width = 8
       Caption = 'ToolButton4'
@@ -103,23 +105,23 @@ object FMenu: TFMenu
       Style = tbsSeparator
     end
     object btnBalcao: TToolButton
-      Left = 460
+      Left = 484
       Top = 0
       Caption = '&Balc'#227'o F4'
       ImageIndex = 5
       OnClick = btnBalcaoClick
     end
     object ToolButton9: TToolButton
-      Left = 571
+      Left = 601
       Top = 0
       Width = 8
       ImageIndex = 7
       Style = tbsSeparator
     end
     object btnImprimir: TToolButton
-      Left = 579
+      Left = 609
       Top = 0
-      Caption = 'Imprimir F8'
+      Caption = 'Imprimir F12'
       ImageIndex = 7
       OnClick = btnImprimirClick
     end
@@ -127,15 +129,15 @@ object FMenu: TFMenu
   object PanGraf: TPanel
     Left = 0
     Top = 245
-    Width = 696
+    Width = 731
     Height = 177
     Align = alBottom
-    Caption = 'PanGraf'
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
+    ExplicitWidth = 696
     object ToolBar1: TToolBar
-      Left = 672
+      Left = 707
       Top = 1
       Width = 23
       Height = 175
@@ -186,19 +188,21 @@ object FMenu: TFMenu
       AlignWithMargins = True
       Left = 4
       Top = 4
-      Width = 665
+      Width = 700
       Height = 169
       ActivePage = TabSheet3
       Align = alClient
       MultiLine = True
       TabOrder = 1
       TabPosition = tpLeft
+      ExplicitWidth = 665
       object TabSheet1: TTabSheet
         Caption = 'Clientes'
+        ExplicitWidth = 637
         object GridPanel1: TGridPanel
           Left = 0
           Top = 0
-          Width = 637
+          Width = 672
           Height = 161
           Align = alClient
           ColumnCollection = <
@@ -224,10 +228,11 @@ object FMenu: TFMenu
               Value = 100.000000000000000000
             end>
           TabOrder = 0
+          ExplicitWidth = 637
           object DBChart3: TDBChart
             Left = 1
             Top = 1
-            Width = 317
+            Width = 335
             Height = 159
             MarginBottom = 1
             MarginLeft = 1
@@ -251,6 +256,7 @@ object FMenu: TFMenu
             BevelOuter = bvNone
             Color = clWhite
             TabOrder = 0
+            ExplicitWidth = 317
             PrintMargins = (
               15
               27
@@ -288,9 +294,9 @@ object FMenu: TFMenu
             end
           end
           object DBChart4: TDBChart
-            Left = 318
+            Left = 336
             Top = 1
-            Width = 318
+            Width = 335
             Height = 159
             MarginBottom = 1
             MarginLeft = 1
@@ -314,6 +320,8 @@ object FMenu: TFMenu
             BevelOuter = bvNone
             Color = clWhite
             TabOrder = 1
+            ExplicitLeft = 318
+            ExplicitWidth = 318
             PrintMargins = (
               15
               27
@@ -360,10 +368,11 @@ object FMenu: TFMenu
       object TabSheet2: TTabSheet
         Caption = 'Produtos'
         ImageIndex = 1
+        ExplicitWidth = 637
         object GridPanel2: TGridPanel
           Left = 0
           Top = 0
-          Width = 637
+          Width = 672
           Height = 161
           Align = alClient
           ColumnCollection = <
@@ -389,10 +398,11 @@ object FMenu: TFMenu
               Value = 100.000000000000000000
             end>
           TabOrder = 0
+          ExplicitWidth = 637
           object DBChart1: TDBChart
             Left = 1
             Top = 1
-            Width = 317
+            Width = 335
             Height = 159
             MarginBottom = 1
             MarginLeft = 1
@@ -415,6 +425,7 @@ object FMenu: TFMenu
             BevelOuter = bvNone
             Color = clWhite
             TabOrder = 0
+            ExplicitWidth = 317
             PrintMargins = (
               15
               27
@@ -452,9 +463,9 @@ object FMenu: TFMenu
             end
           end
           object DBChart2: TDBChart
-            Left = 318
+            Left = 336
             Top = 1
-            Width = 318
+            Width = 335
             Height = 159
             MarginBottom = 1
             MarginLeft = 1
@@ -477,6 +488,8 @@ object FMenu: TFMenu
             BevelOuter = bvNone
             Color = clWhite
             TabOrder = 1
+            ExplicitLeft = 318
+            ExplicitWidth = 318
             PrintMargins = (
               15
               27
@@ -518,10 +531,11 @@ object FMenu: TFMenu
       object TabSheet3: TTabSheet
         Caption = 'Vendas'
         ImageIndex = 2
+        ExplicitWidth = 637
         object DBChart5: TDBChart
           Left = 0
           Top = 0
-          Width = 637
+          Width = 672
           Height = 161
           Title.Font.Color = 8421440
           Title.Font.Height = -12
@@ -535,6 +549,7 @@ object FMenu: TFMenu
           Align = alClient
           Color = clWhite
           TabOrder = 0
+          ExplicitWidth = 637
           PrintMargins = (
             15
             38
@@ -607,7 +622,7 @@ object FMenu: TFMenu
       end
       object miProdutos: TMenuItem
         Caption = 'Produtos'
-        ShortCut = 118
+        ShortCut = 117
         OnClick = btnProdutoClick
       end
     end
@@ -634,7 +649,7 @@ object FMenu: TFMenu
     end
     object miImprimir: TMenuItem
       Caption = 'Imprimir'
-      ShortCut = 119
+      ShortCut = 123
       OnClick = btnImprimirClick
     end
     object miSair: TMenuItem

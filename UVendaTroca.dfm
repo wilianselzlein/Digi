@@ -364,7 +364,7 @@ object FVendaTroca: TFVendaTroca
     object btnTroca: TToolButton
       Left = 0
       Top = 0
-      Caption = 'Troca F5'
+      Caption = '&Troca'
       Down = True
       ImageIndex = 9
       OnClick = btnTrocaClick
@@ -372,7 +372,7 @@ object FVendaTroca: TFVendaTroca
     object btnVenda: TToolButton
       Left = 94
       Top = 0
-      Caption = 'Venda F12'
+      Caption = '&Venda'
       ImageIndex = 11
       OnClick = btnVendaClick
     end
@@ -492,19 +492,21 @@ object FVendaTroca: TFVendaTroca
       'Anterior'
       'Pr'#243'ximo'
       #218'ltimo'
-      'Novo Registro'
-      'Deletar'
+      'Novo Registro F5'
+      'Deletar F8'
       'Importar'
-      'Salvar'
+      'Salvar F7'
       'Cancelar'
       'Atualizar'
       'Apply updates'
-      'Cancel updates')
+      'Cancel updates'
+      '')
     Kind = dbnHorizontal
     ParentShowHint = False
     ShowHint = True
     TabOrder = 4
     OnClick = DBNavAcaoClick
+    ExplicitTop = 308
   end
   object DSItem: TDataSource
     DataSet = Dm.CDSItemTroca

@@ -119,7 +119,7 @@ procedure TFTroca.DBGrid1EditButtonClick(Sender: TObject);
 begin
   inherited;
   StatusCDS(dm.CDSItemTroca);
-  DM.CDSItemTrocaPRODUTOS_ID.AsInteger := FProduto.ConsultaProduto;
+  DM.CDSItemTrocaPRODUTOS_ID.AsInteger := ConsultaProduto;
 end;
 
 procedure TFTroca.DBGrid1KeyDown(Sender: TObject; var Key: Word;

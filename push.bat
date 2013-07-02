@@ -1,4 +1,4 @@
 git add --all
-git commit -m "Erro exclusao venda e ini order"
+git commit -m "Atalhos teclado"
 git push origin master
 pause

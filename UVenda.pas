@@ -49,7 +49,7 @@ procedure TFVenda.DBGrid1EditButtonClick(Sender: TObject);
 begin
   inherited;
   StatusCDS(dm.CDSItemVenda);
-  DM.CDSItemVendaPRODUTOS_ID.AsInteger := FProduto.ConsultaProduto;
+  DM.CDSItemVendaPRODUTOS_ID.AsInteger := ConsultaProduto;
 end;
 
 procedure TFVenda.DBGrid1KeyDown(Sender: TObject; var Key: Word;
