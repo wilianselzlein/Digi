@@ -506,7 +506,6 @@ object FVendaTroca: TFVendaTroca
     ShowHint = True
     TabOrder = 4
     OnClick = DBNavAcaoClick
-    ExplicitTop = 308
   end
   object DSItem: TDataSource
     DataSet = Dm.CDSItemTroca

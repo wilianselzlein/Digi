@@ -58,7 +58,7 @@ object Dm: TDm
     Left = 104
     Top = 16
     Bitmap = {
-      494C01010F003801380110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010F003C013C0110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000004000000001002000000000000040
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -599,7 +599,7 @@ object Dm: TDm
     Left = 168
     Top = 16
     Bitmap = {
-      494C01010900C001C00120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010900C401C40120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       000000000000000000000000000000000000F4F7F0107EB455BF539C1EFF539C
       1EFF539C1EFF539C1EFF539C1EFF539C1EFF539C1EFF539C1EFF79B548FFFFFF
@@ -2573,6 +2573,7 @@ object Dm: TDm
     Top = 344
     object CDSTrocaID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object CDSTrocaDATATROCA: TDateField
@@ -2609,6 +2610,7 @@ object Dm: TDm
     Top = 344
     object QTrocaID: TIntegerField
       FieldName = 'ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object QTrocaDATATROCA: TDateField
@@ -2645,6 +2647,7 @@ object Dm: TDm
     Top = 408
     object QItemTrocaTROCA_ID: TIntegerField
       FieldName = 'TROCA_ID'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object QItemTrocaITEM: TIntegerField
@@ -2685,6 +2688,7 @@ object Dm: TDm
     end
     object CDSItemTrocaITEM: TIntegerField
       FieldName = 'ITEM'
+      ProviderFlags = [pfInUpdate, pfInWhere, pfInKey]
       Required = True
     end
     object CDSItemTrocaPRODUTOS_ID: TIntegerField
@@ -5910,5 +5914,15 @@ object Dm: TDm
     Left = 360
     Top = 144
     DOMVendorDesc = 'MSXML'
+  end
+  object DSItemVenda: TDataSource
+    DataSet = CDSItemVenda
+    Left = 104
+    Top = 264
+  end
+  object DSItemTroca: TDataSource
+    DataSet = CDSItemTroca
+    Left = 96
+    Top = 408
   end
 end

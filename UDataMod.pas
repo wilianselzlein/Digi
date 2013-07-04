@@ -155,6 +155,8 @@ type
     XMLDoc: TXMLDocument;
     QProdutoESTOQUE: TFMTBCDField;
     CDSProdutoESTOQUE: TFMTBCDField;
+    DSItemVenda: TDataSource;
+    DSItemTroca: TDataSource;
     procedure CDSProdutoAfterDelete(DataSet: TDataSet);
     procedure CDSProdutoAfterPost(DataSet: TDataSet);
     procedure CDSProdutoNewRecord(DataSet: TDataSet);

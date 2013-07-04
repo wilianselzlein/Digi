@@ -269,10 +269,10 @@ end;
 procedure TFVendaTroca._KeyDown(var Key: Word);
 begin
   case Key of
-    VK_F5: DBNavAcaoClick(DBNavAcao, nbInsert);
-    //VK_F6: DBNavAcaoClick(DBNavAcao, nbEdit);
-    VK_F7: DBNavAcaoClick(DBNavAcao, nbPost);
-    VK_F8: DBNavAcaoClick(DBNavAcao, nbDelete);
+    VK_F5: DBNavAcao.BtnClick(nbInsert);
+    //VK_F6: DBNavAcao.BtnClick(nbEdit);
+    VK_F7: DBNavAcao.BtnClick(nbPost);
+    VK_F8: DBNavAcao.BtnClick(nbDelete);
     VK_F10: btnCliente.Click;
     VK_F11: btnConsulta.Click;
     VK_f9: btnProduto.Click;

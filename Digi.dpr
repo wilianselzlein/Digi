@@ -13,7 +13,8 @@ uses
   UTroca in 'UTroca.pas' {FTroca},
   UVenda in 'UVenda.pas' {FVenda},
   UThreadExecSql in 'UThreadExecSql.pas',
-  UFiltroData in 'UFiltroData.pas' {FFiltroData};
+  UFiltroData in 'UFiltroData.pas' {FFiltroData},
+  UDebug in 'UDebug.pas' {FDebug};
 
 {$R *.res}
 
