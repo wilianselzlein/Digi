@@ -135,7 +135,6 @@ object FMenu: TFMenu
     Color = clWhite
     ParentBackground = False
     TabOrder = 1
-    ExplicitWidth = 696
     object ToolBar1: TToolBar
       Left = 707
       Top = 1
@@ -195,10 +194,12 @@ object FMenu: TFMenu
       MultiLine = True
       TabOrder = 1
       TabPosition = tpLeft
-      ExplicitWidth = 665
       object TabSheet1: TTabSheet
         Caption = 'Clientes'
-        ExplicitWidth = 637
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GridPanel1: TGridPanel
           Left = 0
           Top = 0
@@ -228,7 +229,6 @@ object FMenu: TFMenu
               Value = 100.000000000000000000
             end>
           TabOrder = 0
-          ExplicitWidth = 637
           object DBChart3: TDBChart
             Left = 1
             Top = 1
@@ -256,7 +256,6 @@ object FMenu: TFMenu
             BevelOuter = bvNone
             Color = clWhite
             TabOrder = 0
-            ExplicitWidth = 317
             PrintMargins = (
               15
               27
@@ -320,8 +319,6 @@ object FMenu: TFMenu
             BevelOuter = bvNone
             Color = clWhite
             TabOrder = 1
-            ExplicitLeft = 318
-            ExplicitWidth = 318
             PrintMargins = (
               15
               27
@@ -368,7 +365,10 @@ object FMenu: TFMenu
       object TabSheet2: TTabSheet
         Caption = 'Produtos'
         ImageIndex = 1
-        ExplicitWidth = 637
+        ExplicitLeft = 0
+        ExplicitTop = 0
+        ExplicitWidth = 0
+        ExplicitHeight = 0
         object GridPanel2: TGridPanel
           Left = 0
           Top = 0
@@ -398,7 +398,6 @@ object FMenu: TFMenu
               Value = 100.000000000000000000
             end>
           TabOrder = 0
-          ExplicitWidth = 637
           object DBChart1: TDBChart
             Left = 1
             Top = 1
@@ -425,7 +424,6 @@ object FMenu: TFMenu
             BevelOuter = bvNone
             Color = clWhite
             TabOrder = 0
-            ExplicitWidth = 317
             PrintMargins = (
               15
               27
@@ -488,8 +486,6 @@ object FMenu: TFMenu
             BevelOuter = bvNone
             Color = clWhite
             TabOrder = 1
-            ExplicitLeft = 318
-            ExplicitWidth = 318
             PrintMargins = (
               15
               27
@@ -531,7 +527,6 @@ object FMenu: TFMenu
       object TabSheet3: TTabSheet
         Caption = 'Vendas'
         ImageIndex = 2
-        ExplicitWidth = 637
         object DBChart5: TDBChart
           Left = 0
           Top = 0
@@ -549,7 +544,6 @@ object FMenu: TFMenu
           Align = alClient
           Color = clWhite
           TabOrder = 0
-          ExplicitWidth = 637
           PrintMargins = (
             15
             38

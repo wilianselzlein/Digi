@@ -34,10 +34,8 @@ type
     procedure DBGridTitleClick(Column: TColumn);
     procedure DBGridKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
-    procedure FormCreate(Sender: TObject);
   private
     { Private declarations }
-    procedure WMSysCommand(var Msg: TWMSysCommand) ; message WM_SYSCOMMAND;
   public
     { Public declarations }
   end;
@@ -45,27 +43,11 @@ type
 var
   FPadrao: TFPadrao;
 
-const
-  SC_MyMenuItemParametro = WM_USER + 1;
-
 implementation
 
 {$R *.dfm}
 
-uses UDataMod, UFuncoes, UMenu, UDebug;
-
-procedure TFPadrao.WMSysCommand(var Msg: TWMSysCommand);
-begin
-  if Msg.CmdType = SC_MyMenuItemParametro then
-  begin
-    if Application.FindComponent('FDebug') = nil then
-      Application.CreateForm(TFDebug, FDebug)
-    else
-      FDebug.BringToFront;
-  end
-  else
-    inherited;
-end;
+uses UDataMod, UFuncoes, UMenu;
 
 procedure TFPadrao.DataSourceDataChange(Sender: TObject; Field: TField);
 begin
@@ -123,14 +105,6 @@ end;
 procedure TFPadrao.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Action := Cafree;
-end;
-
-procedure TFPadrao.FormCreate(Sender: TObject);
-var SysMenu : HMenu;
-begin
-  SysMenu := GetSystemMenu(Handle, FALSE);
-  AppendMenu(SysMenu, MF_SEPARATOR, 0, '');
-  AppendMenu(SysMenu, MF_STRING, SC_MyMenuItemParametro, 'Debug');
 end;
 
 procedure TFPadrao.FormKeyDown(Sender: TObject; var Key: Word;

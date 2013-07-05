@@ -12,14 +12,16 @@ object FDebug: TFDebug
   Font.Style = []
   FormStyle = fsMDIChild
   OldCreateOrder = False
+  Position = poMainFormCenter
   Visible = True
+  OnClose = FormClose
   PixelsPerInch = 96
   TextHeight = 13
   object GridPanel1: TGridPanel
     Left = 0
     Top = 0
     Width = 646
-    Height = 294
+    Height = 199
     Align = alClient
     Caption = 'GridPanel1'
     ColumnCollection = <
@@ -61,15 +63,11 @@ object FDebug: TFDebug
         SizeStyle = ssAuto
       end>
     TabOrder = 0
-    ExplicitLeft = 144
-    ExplicitTop = 40
-    ExplicitWidth = 185
-    ExplicitHeight = 41
     object DBGrid1: TDBGrid
       Left = 1
       Top = 1
       Width = 322
-      Height = 146
+      Height = 98
       Align = alClient
       DataSource = Dm.DSVenda
       TabOrder = 0
@@ -83,7 +81,7 @@ object FDebug: TFDebug
       Left = 323
       Top = 1
       Width = 322
-      Height = 146
+      Height = 98
       Align = alClient
       DataSource = Dm.DSItemVenda
       TabOrder = 1
@@ -95,9 +93,9 @@ object FDebug: TFDebug
     end
     object DBGrid3: TDBGrid
       Left = 1
-      Top = 147
+      Top = 99
       Width = 322
-      Height = 146
+      Height = 98
       Align = alClient
       DataSource = Dm.DSTroca
       TabOrder = 2
@@ -109,9 +107,9 @@ object FDebug: TFDebug
     end
     object DBGrid4: TDBGrid
       Left = 323
-      Top = 147
+      Top = 99
       Width = 322
-      Height = 146
+      Height = 98
       Align = alClient
       DataSource = Dm.DSItemTroca
       TabOrder = 3
@@ -121,5 +119,19 @@ object FDebug: TFDebug
       TitleFont.Name = 'Tahoma'
       TitleFont.Style = []
     end
+  end
+  object DBGrid5: TDBGrid
+    Left = 0
+    Top = 199
+    Width = 646
+    Height = 95
+    Align = alBottom
+    DataSource = Dm.DSVendaTroca
+    TabOrder = 1
+    TitleFont.Charset = DEFAULT_CHARSET
+    TitleFont.Color = clWindowText
+    TitleFont.Height = -11
+    TitleFont.Name = 'Tahoma'
+    TitleFont.Style = []
   end
 end

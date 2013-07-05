@@ -157,6 +157,7 @@ type
     CDSProdutoESTOQUE: TFMTBCDField;
     DSItemVenda: TDataSource;
     DSItemTroca: TDataSource;
+    DSProduto: TDataSource;
     procedure CDSProdutoAfterDelete(DataSet: TDataSet);
     procedure CDSProdutoAfterPost(DataSet: TDataSet);
     procedure CDSProdutoNewRecord(DataSet: TDataSet);
@@ -310,7 +311,8 @@ end;
 
 procedure TDm.CDSTrocaAfterPost(DataSet: TDataSet);
 begin
-  CDSTroca.ApplyUpdates(0);
+  if (dm.CDSTroca.ChangeCount > 0) and (Application.FindComponent('FVendaTroca') = nil) then
+    CDSTroca.ApplyUpdates(0);
 end;
 
 procedure TDm.CDSTrocaBeforeDelete(DataSet: TDataSet);
@@ -339,6 +341,10 @@ end;
 procedure TDm.CDSVendaAfterPost(DataSet: TDataSet);
 begin
   CDSVenda.ApplyUpdates(0);
+  if (dm.CDSTroca.ChangeCount > 0) and (Application.FindComponent('FVendaTroca') <> nil) then
+    Dm.CDSTroca.ApplyUpdates(0);
+  if dm.CDSVendaTroca.ChangeCount > 0 then
+     Dm.CDSVendaTroca.ApplyUpdates(0);
 end;
 
 procedure TDm.CDSVendaBeforeDelete(DataSet: TDataSet);
