@@ -252,7 +252,7 @@ end;
 
 procedure TDm.CDSItemVendaBeforePost(DataSet: TDataSet);
 begin
-  if CDSItemVendaQUANTIDADE.AsFloat > GetEstoque(CDSItemVendaPRODUTOS_ID.AsInteger) then //ver possibilidade de localizar na troca
+  if DM.CDSItemVendaQUANTIDADE.AsFloat > GetEstoque(DM.CDSItemVendaPRODUTOS_ID.AsInteger) then //ver possibilidade de localizar na troca
   begin
     raise Exception.Create('Estoque insuficiente para essa venda!');
     Abort;
@@ -395,8 +395,16 @@ begin
     SQLConnection.params.LoadFromFile(ExtractFilePath(Application.ExeName) + ARQ)
   else
     SQLConnection.params.SaveToFile(ExtractFilePath(Application.ExeName) + ARQ);
+  try
   SQLConnection.Connected := True;
-
+  except
+    on E: Exception do
+    begin
+      showmessage('Erro:' + E.Message);
+      Application.Terminate;
+      Exit;
+    end;
+  end;
   try
     v := ExecSql('SELECT ID FROM VERSAO');
   except

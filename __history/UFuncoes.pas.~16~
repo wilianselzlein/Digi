@@ -25,6 +25,9 @@ function FiltroData: TFiltro;
 function SomenteNumero(Value: string): string;
 procedure RelacionaVendaTroca(ATipo: TVendaTroca);
 procedure LimpaRelacionamentoTroca;
+procedure TesteValorVendaTroca;
+function ConsultaProduto(AField: String = ''): Variant;
+procedure TestaEstoque;
 
 const
   CAPTIONINPUTBOX = String('Digi');
@@ -33,7 +36,7 @@ var
 
 implementation
 
-uses UPadrao, UDataMod, UThreadExecSql, UFiltroData;
+uses UPadrao, UDataMod, UThreadExecSql, UFiltroData, UProduto;
 
 procedure StatusCDS(ACds: TClientDataSet);
 begin
@@ -87,7 +90,7 @@ end;
 
 function GetEstoque(AIdProduto: Integer): Double;
 begin
-  Result := Float(ExecSQL('SELECT ESTOQUE FROM PRODUTOS WHERE ID = ' + IntToStr(AIdProduto)));
+  Result := StrToFloatDef(VarToStr(ExecSQL('SELECT ESTOQUE FROM PRODUTOS WHERE ID = ' + IntToStr(AIdProduto))),0);
 end;
 
 procedure GridDrawColumnCell(Sender: TObject; const Rect: TRect; DataCol: Integer; Column: TColumn; State: TGridDrawState);
@@ -193,6 +196,39 @@ begin
   Dm.CDSTroca.MasterSource := nil;
   Dm.CDSTroca.MasterFields := '';
   Dm.CDSTroca.IndexFieldNames := '';
+end;
+
+procedure TesteValorVendaTroca;
+begin
+  if dm.CDSTrocaTOTALTROCADO.AsFloat > dm.CDSVendaTOTALVENDIDO.AsFloat * 0.4 then
+    showmessage('O valor da troca (' + dm.CDSTrocaTOTALTROCADO.DisplayText + ') ultrapassou 40% da venda (' + dm.CDSVendaTOTALVENDIDO.DisplayText + ')!');
+end;
+
+function ConsultaProduto(AField: String = ''): Variant;
+begin
+  try
+    FProduto := TFProduto.Create(nil);
+    FProduto.FormStyle := fsNormal;
+    FProduto.Visible := False;
+    FProduto.ShowModal;
+
+    if AField <> '' then
+      Result := dm.CDSProduto.FieldByName(AField).Value
+    else
+      Result := dm.CDSProdutoID.AsInteger;
+  finally
+    FProduto.Release;
+    FreeAndNil(FProduto);
+  end;
+end;
+
+procedure TestaEstoque;
+begin
+  if DM.CDSItemVendaQUANTIDADE.AsFloat > GetEstoque(DM.CDSItemVendaPRODUTOS_ID.AsInteger) then //ver possibilidade de localizar na troca
+  begin
+    raise Exception.Create('Estoque insuficiente para essa venda!');
+    Abort;
+  end;
 end;
 
 end.

@@ -33,7 +33,7 @@ object FPadrao: TFPadrao
     Font.Height = -11
     Font.Name = 'MS Sans Serif'
     Font.Style = []
-    Options = [dgTitles, dgIndicator, dgColumnResize, dgRowLines, dgTabs, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick]
+    Options = [dgTitles, dgIndicator, dgColumnResize, dgRowLines, dgTabs, dgRowSelect, dgAlwaysShowSelection, dgConfirmDelete, dgCancelOnExit, dgTitleClick]
     ParentFont = False
     TabOrder = 0
     TitleFont.Charset = DEFAULT_CHARSET

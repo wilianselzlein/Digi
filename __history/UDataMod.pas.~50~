@@ -157,6 +157,7 @@ type
     CDSProdutoESTOQUE: TFMTBCDField;
     DSItemVenda: TDataSource;
     DSItemTroca: TDataSource;
+    DSProduto: TDataSource;
     procedure CDSProdutoAfterDelete(DataSet: TDataSet);
     procedure CDSProdutoAfterPost(DataSet: TDataSet);
     procedure CDSProdutoNewRecord(DataSet: TDataSet);
@@ -251,11 +252,7 @@ end;
 
 procedure TDm.CDSItemVendaBeforePost(DataSet: TDataSet);
 begin
-  if CDSItemVendaQUANTIDADE.AsFloat > GetEstoque(CDSItemVendaPRODUTOS_ID.AsInteger) then //ver possibilidade de localizar na troca
-  begin
-    raise Exception.Create('Estoque insuficiente para essa venda!');
-    Abort;
-  end;
+  TestaEstoque;
 end;
 
 procedure TDm.CDSItemVendaCalcFields(DataSet: TDataSet);

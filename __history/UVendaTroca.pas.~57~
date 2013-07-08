@@ -226,6 +226,11 @@ begin
     end;
     if btnVenda.Down then
     begin
+      if StrToFloatDef(txtQuant.Text, 1) > GetEstoque(DM.CDSItemVendaPRODUTOS_ID.AsInteger) then //ver possibilidade de localizar na troca
+      begin
+        raise Exception.Create('Estoque insuficiente para essa venda!');
+        Abort;
+      end;
       dm.CDSItemVenda.Append;
       dm.CDSItemVendaPRODUTOS_ID.AsInteger := dm.CDSProdutoID.AsInteger;
       dm.CDSItemVendaQUANTIDADE.AsFloat := StrToFloatDef(txtQuant.Text, 1);
@@ -247,17 +252,27 @@ begin
       end;
       if dm.CDSTroca.RecordCount = 0 then
       begin
+        dm.CDSTroca.Last;
         dm.CDSTroca.Append;
+        dm.CDSTroca.Edit;
         dm.CDSTrocaDATATROCA.AsDateTime := dm.CDSVendaDATAVENDA.AsDateTime;
         dm.CDSTroca.post;
-        if dm.CDSVendaTroca.ChangeCount > 0 then
-          Dm.CDSVendaTroca.ApplyUpdates(0);
       end;
+      dm.CDSItemTroca.Last;
       dm.CDSItemTroca.Append;
+      dm.CDSItemTroca.Edit;
       dm.CDSItemTrocaPRODUTOS_ID.AsInteger := dm.CDSProdutoID.AsInteger;
       dm.CDSItemTrocaQUANTIDADE.AsFloat := StrToFloatDef(txtQuant.Text, 1);
       dm.CDSItemTrocaPRECO.AsFloat := ifThen(StrToFloatDef(txtPreco.Text, 0) > 0, StrToFloatDef(txtPreco.Text, 0), dm.CDSProdutoPRECO.AsFloat);
-      dm.CDSItemTroca.Post;
+      try
+        dm.CDSItemTroca.Post;
+      except
+        on E: exception do
+        begin
+           showmessage('Erro! Tente incluir o produto novamente! ' + e.message + #13 + e.ClassName);
+           dm.CDSItemTroca.Cancel;
+        end;
+      end;
     end;
     txtPreco.Clear;
     txtQuant.Text := '1';

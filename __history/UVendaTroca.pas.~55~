@@ -247,11 +247,15 @@ begin
       end;
       if dm.CDSTroca.RecordCount = 0 then
       begin
+        dm.CDSTroca.Last;
         dm.CDSTroca.Append;
+        dm.CDSTroca.Edit;
         dm.CDSTrocaDATATROCA.AsDateTime := dm.CDSVendaDATAVENDA.AsDateTime;
         dm.CDSTroca.post;
       end;
+      dm.CDSItemTroca.Last;
       dm.CDSItemTroca.Append;
+      dm.CDSItemTroca.Edit;
       dm.CDSItemTrocaPRODUTOS_ID.AsInteger := dm.CDSProdutoID.AsInteger;
       dm.CDSItemTrocaQUANTIDADE.AsFloat := StrToFloatDef(txtQuant.Text, 1);
       dm.CDSItemTrocaPRECO.AsFloat := ifThen(StrToFloatDef(txtPreco.Text, 0) > 0, StrToFloatDef(txtPreco.Text, 0), dm.CDSProdutoPRECO.AsFloat);

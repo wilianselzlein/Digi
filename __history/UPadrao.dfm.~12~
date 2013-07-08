@@ -11,6 +11,7 @@ object FPadrao: TFPadrao
   Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsMDIChild
+  KeyPreview = True
   OldCreateOrder = False
   Visible = True
   OnClose = FormClose
@@ -154,10 +155,10 @@ object FPadrao: TFPadrao
         'Anterior'
         'Pr'#243'ximo'
         #218'ltimo'
-        'Novo Registro'
-        'Deletar'
+        'Novo Registro F5'
+        'Deletar F8'
         'Importar'
-        'Salvar'
+        'Salvar F7'
         'Cancelar'
         'Atualizar'
         'Apply updates'

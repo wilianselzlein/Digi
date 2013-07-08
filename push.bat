@@ -1,4 +1,4 @@
 git add --all
-git commit -m "Erro beggin at table"
+git commit -m "Melhorias no balcao"
 git push origin master
 pause

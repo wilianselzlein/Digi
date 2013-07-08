@@ -143,6 +143,16 @@ begin
   case Button of
     nbPost: TesteValorVendaTroca;
     nbInsert: txtClienteId.SetFocus;
+    nbDelete:
+    begin
+      dm.CDSVenda.Close;
+      dm.CDSTroca.Close;
+      dm.CDSVendaTroca.Close;
+      dm.CDSVenda.Open;
+      dm.CDSTroca.Open;
+      dm.CDSVendaTroca.Open;
+      dm.CDSVenda.Last;
+    end;
   end;
 end;
 
@@ -226,6 +236,12 @@ begin
     end;
     if btnVenda.Down then
     begin
+      if StrToFloatDef(txtQuant.Text, 1) > GetEstoque(dm.CDSProdutoID.AsInteger) then
+      begin
+        txtBarra.Text := 'Estoque insuficiente!';
+        txtBarra.SetFocus;
+        exit;
+      end;
       dm.CDSItemVenda.Append;
       dm.CDSItemVendaPRODUTOS_ID.AsInteger := dm.CDSProdutoID.AsInteger;
       dm.CDSItemVendaQUANTIDADE.AsFloat := StrToFloatDef(txtQuant.Text, 1);
