@@ -191,6 +191,7 @@ procedure TFVendaTroca.FormShow(Sender: TObject);
 begin
   if not dm.cdstroca.Active then
     dm.cdstroca.open;
+  dm.CDSVenda.Last;
 end;
 
 procedure TFVendaTroca.Imprimir;
@@ -267,8 +268,8 @@ begin
         dm.CDSTroca.Append;
         dm.CDSTroca.Edit;
         dm.CDSTrocaDATATROCA.AsDateTime := dm.CDSVendaDATAVENDA.AsDateTime;
-        dm.CDSTroca.post;
       end;
+//      StatusCDS(dm.CDSTroca);
       dm.CDSItemTroca.Last;
       dm.CDSItemTroca.Append;
       dm.CDSItemTroca.Edit;
@@ -284,6 +285,9 @@ begin
            dm.CDSItemTroca.Cancel;
         end;
       end;
+      StatusCDS(DM.CDSVenda);
+//      StatusCDS(dm.CDSTroca);
+//      dm.CDSTroca.post;
     end;
     txtPreco.Clear;
     txtQuant.Text := '1';
