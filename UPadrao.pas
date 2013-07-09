@@ -29,7 +29,6 @@ type
     procedure DBGridDrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
-    procedure DBNavClick(Sender: TObject; Button: TNavigateBtn);
     procedure DBNavAcaoClick(Sender: TObject; Button: TNavigateBtn);
     procedure DBGridTitleClick(Column: TColumn);
     procedure DBGridKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -89,15 +88,6 @@ begin
       on EAbstractError do
         showmessage('Importação ainda não implementada!');
     end;
-    Abort;
-  end;
-end;
-
-procedure TFPadrao.DBNavClick(Sender: TObject; Button: TNavigateBtn);
-begin
-  if Button = nbRefresh then
-  begin
-    Close;
     Abort;
   end;
 end;
