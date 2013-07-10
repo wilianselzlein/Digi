@@ -167,8 +167,8 @@ end;
 
 procedure TFVendaTroca.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  LimpaRelacionamentoTroca;
-  RelacionaVendaTroca(vtTroca);
+//  LimpaRelacionamentoTroca;
+//  RelacionaVendaTroca(vtTroca);
   Action := Cafree;
 end;
 

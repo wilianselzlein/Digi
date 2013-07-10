@@ -111,12 +111,6 @@ begin
   if Application.FindComponent('FTroca') <> nil then
     FTroca.Close;
 
-  RelacionaVendaTroca(vtVenda);
-
-  Dm.CDSTroca.MasterSource := Dm.DSVendaTroca;
-  Dm.CDSTroca.MasterFields := 'TROCA_ID';
-  Dm.CDSTroca.IndexFieldNames := 'ID';
-
   if Application.FindComponent('FVendaTroca') = nil then
     Application.CreateForm(TFVendaTroca, FVendaTroca)
   else
@@ -234,12 +228,20 @@ begin
   AppendMenu(SysMenu, MF_SEPARATOR, 0, '');
   AppendMenu(SysMenu, MF_STRING, SC_MyMenuItemParametro, 'Debug');
   btnGrafAtu.Click;
+
+  RelacionaVendaTroca(vtVenda);
+
+  Dm.CDSTroca.MasterSource := Dm.DSVendaTroca;
+  Dm.CDSTroca.MasterFields := 'TROCA_ID';
+  Dm.CDSTroca.IndexFieldNames := 'ID';
 end;
 
 procedure TFMenu.FormShow(Sender: TObject);
 begin
   Self.Caption := CAPTIONINPUTBOX;
+  dm.CDSVenda.Open;
   dm.CDSVendaTroca.Open;
+  dm.CDSTroca.Open;
 end;
 
 function TFMenu.GetChart(APrimeiro: boolean = True): TDBChart;

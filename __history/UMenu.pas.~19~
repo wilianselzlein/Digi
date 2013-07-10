@@ -73,6 +73,7 @@ type
   private
     { Private declarations }
     function GetChart(APrimeiro: boolean = True): TDBChart;
+    procedure WMSysCommand(var Msg: TWMSysCommand) ; message WM_SYSCOMMAND;
   public
     { Public declarations }
   end;
@@ -80,12 +81,28 @@ type
 var
   FMenu: TFMenu;
 
+const
+  SC_MyMenuItemParametro = WM_USER + 1;
+
 implementation
 
 {$R *.dfm}
 
 uses UDataMod, UFuncoes, UProduto, UCliente, UVendaTroca, UVenda, UTroca,
-  UPadrao;
+  UPadrao, UDebug;
+
+procedure TFMenu.WMSysCommand(var Msg: TWMSysCommand);
+begin
+  if Msg.CmdType = SC_MyMenuItemParametro then
+  begin
+    if Application.FindComponent('FDebug') = nil then
+      Application.CreateForm(TFDebug, FDebug)
+    else
+      FDebug.BringToFront;
+  end
+  else
+    inherited;
+end;
 
 procedure TFMenu.btnBalcaoClick(Sender: TObject);
 begin
@@ -211,7 +228,11 @@ begin
 end;
 
 procedure TFMenu.FormCreate(Sender: TObject);
+var SysMenu : HMenu;
 begin
+  SysMenu := GetSystemMenu(Handle, FALSE);
+  AppendMenu(SysMenu, MF_SEPARATOR, 0, '');
+  AppendMenu(SysMenu, MF_STRING, SC_MyMenuItemParametro, 'Debug');
   btnGrafAtu.Click;
 end;
 
