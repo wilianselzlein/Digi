@@ -76,7 +76,7 @@ object FVendaTroca: TFVendaTroca
       Width = 183
       Height = 33
       DataSource = Dm.DSVenda
-      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbRefresh]
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
       Align = alRight
       Flat = True
       Ctl3D = True

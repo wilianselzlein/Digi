@@ -190,6 +190,7 @@ type
     procedure CDSItemTrocaPRODUTOS_IDChange(Sender: TField);
     procedure CDSItemVendaPRODUTOS_IDChange(Sender: TField);
     procedure CDSItemVendaBeforePost(DataSet: TDataSet);
+    procedure CDSVendaBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -453,6 +454,12 @@ begin
       ' end', True);
   end;
   ExecSQL('UPDATE VERSAO SET ID = 3;', True);
+end;
+
+procedure TDm.CDSVendaBeforePost(DataSet: TDataSet);
+begin
+  if CDSVendaCLIENTES_ID.IsNull then
+    raise Exception.Create('Selecione o cliente!');
 end;
 
 end.

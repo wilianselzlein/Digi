@@ -95,7 +95,7 @@ object FPadrao: TFPadrao
       Width = 199
       Height = 28
       DataSource = DataSource
-      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast, nbRefresh]
+      VisibleButtons = [nbFirst, nbPrior, nbNext, nbLast]
       Align = alRight
       Flat = True
       Ctl3D = True
@@ -115,7 +115,6 @@ object FPadrao: TFPadrao
       ParentShowHint = False
       ShowHint = True
       TabOrder = 1
-      OnClick = DBNavClick
     end
   end
   object Panel1: TPanel

@@ -190,6 +190,7 @@ type
     procedure CDSItemTrocaPRODUTOS_IDChange(Sender: TField);
     procedure CDSItemVendaPRODUTOS_IDChange(Sender: TField);
     procedure CDSItemVendaBeforePost(DataSet: TDataSet);
+    procedure CDSVendaBeforePost(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -252,7 +253,7 @@ end;
 
 procedure TDm.CDSItemVendaBeforePost(DataSet: TDataSet);
 begin
-  if CDSItemVendaQUANTIDADE.AsFloat > GetEstoque(CDSItemVendaPRODUTOS_ID.AsInteger) then //ver possibilidade de localizar na troca
+  if DM.CDSItemVendaQUANTIDADE.AsFloat > GetEstoque(DM.CDSItemVendaPRODUTOS_ID.AsInteger) then //ver possibilidade de localizar na troca
   begin
     raise Exception.Create('Estoque insuficiente para essa venda!');
     Abort;
@@ -361,7 +362,7 @@ begin
   end;
 end;
 
-procedure TDm.CDSVendaNewRecord(DataSet: TDataSet);
+rocedure TDm.CDSVendaNewRecord(DataSet: TDataSet);
 begin
   CDSVendaDATAVENDA.AsDateTime := Date;
   try
@@ -395,8 +396,16 @@ begin
     SQLConnection.params.LoadFromFile(ExtractFilePath(Application.ExeName) + ARQ)
   else
     SQLConnection.params.SaveToFile(ExtractFilePath(Application.ExeName) + ARQ);
+  try
   SQLConnection.Connected := True;
-
+  except
+    on E: Exception do
+    begin
+      showmessage('Erro:' + E.Message);
+      Application.Terminate;
+      Exit;
+    end;
+  end;
   try
     v := ExecSql('SELECT ID FROM VERSAO');
   except
@@ -447,5 +456,10 @@ begin
   ExecSQL('UPDATE VERSAO SET ID = 3;', True);
 end;
 
-end.
+eprocedure TDm.CDSVendaBeforePost(DataSet: TDataSet);
+begin
+
+end;
+
+nd.
 

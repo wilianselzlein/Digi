@@ -94,6 +94,7 @@ object FMenu: TFMenu
       Top = 0
       Caption = '&Trocas F2'
       ImageIndex = 4
+      Visible = False
       OnClick = btnTrocaClick
     end
     object ToolButton4: TToolButton
@@ -196,10 +197,6 @@ object FMenu: TFMenu
       TabPosition = tpLeft
       object TabSheet1: TTabSheet
         Caption = 'Clientes'
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object GridPanel1: TGridPanel
           Left = 0
           Top = 0
@@ -365,10 +362,6 @@ object FMenu: TFMenu
       object TabSheet2: TTabSheet
         Caption = 'Produtos'
         ImageIndex = 1
-        ExplicitLeft = 0
-        ExplicitTop = 0
-        ExplicitWidth = 0
-        ExplicitHeight = 0
         object GridPanel2: TGridPanel
           Left = 0
           Top = 0
@@ -630,6 +623,7 @@ object FMenu: TFMenu
       object miTrocas: TMenuItem
         Caption = 'Trocas'
         ShortCut = 113
+        Visible = False
         OnClick = btnTrocaClick
       end
       object N1: TMenuItem

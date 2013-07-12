@@ -14,6 +14,7 @@ type
     DBGrid3: TDBGrid;
     DBGrid4: TDBGrid;
     DBGrid5: TDBGrid;
+    DBGrid6: TDBGrid;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }

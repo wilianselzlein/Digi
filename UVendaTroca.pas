@@ -167,8 +167,8 @@ end;
 
 procedure TFVendaTroca.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
-  LimpaRelacionamentoTroca;
-  RelacionaVendaTroca(vtTroca);
+//  LimpaRelacionamentoTroca;
+//  RelacionaVendaTroca(vtTroca);
   Action := Cafree;
 end;
 
@@ -191,6 +191,7 @@ procedure TFVendaTroca.FormShow(Sender: TObject);
 begin
   if not dm.cdstroca.Active then
     dm.cdstroca.open;
+  dm.CDSVenda.Last;
 end;
 
 procedure TFVendaTroca.Imprimir;
@@ -219,6 +220,7 @@ begin
 end;
 
 procedure TFVendaTroca.txtBarraKeyPress(Sender: TObject; var Key: Char);
+var lProd: Integer;
 begin
   if key = #13 then
   begin
@@ -234,16 +236,17 @@ begin
       txtBarra.SetFocus;
       Exit;
     end;
+    lProd := Dm.CDSProdutoID.AsInteger;
     if btnVenda.Down then
     begin
-      if StrToFloatDef(txtQuant.Text, 1) > GetEstoque(dm.CDSProdutoID.AsInteger) then
+      if StrToFloatDef(txtQuant.Text, 1) > GetEstoque(lProd) then
       begin
         txtBarra.Text := 'Estoque insuficiente!';
         txtBarra.SetFocus;
         exit;
       end;
       dm.CDSItemVenda.Append;
-      dm.CDSItemVendaPRODUTOS_ID.AsInteger := dm.CDSProdutoID.AsInteger;
+      dm.CDSItemVendaPRODUTOS_ID.AsInteger := lProd;
       dm.CDSItemVendaQUANTIDADE.AsFloat := StrToFloatDef(txtQuant.Text, 1);
       dm.CDSItemVendaPRECO.AsFloat := ifThen(StrToFloatDef(txtPreco.Text, 0) > 0, StrToFloatDef(txtPreco.Text, 0), dm.CDSProdutoPRECO.AsFloat);
       dm.CDSItemVenda.Post;
@@ -267,12 +270,12 @@ begin
         dm.CDSTroca.Append;
         dm.CDSTroca.Edit;
         dm.CDSTrocaDATATROCA.AsDateTime := dm.CDSVendaDATAVENDA.AsDateTime;
-        dm.CDSTroca.post;
       end;
+//      StatusCDS(dm.CDSTroca);
       dm.CDSItemTroca.Last;
       dm.CDSItemTroca.Append;
       dm.CDSItemTroca.Edit;
-      dm.CDSItemTrocaPRODUTOS_ID.AsInteger := dm.CDSProdutoID.AsInteger;
+      dm.CDSItemTrocaPRODUTOS_ID.AsInteger := lProd;
       dm.CDSItemTrocaQUANTIDADE.AsFloat := StrToFloatDef(txtQuant.Text, 1);
       dm.CDSItemTrocaPRECO.AsFloat := ifThen(StrToFloatDef(txtPreco.Text, 0) > 0, StrToFloatDef(txtPreco.Text, 0), dm.CDSProdutoPRECO.AsFloat);
       try
@@ -284,6 +287,9 @@ begin
            dm.CDSItemTroca.Cancel;
         end;
       end;
+      StatusCDS(DM.CDSVenda);
+//      StatusCDS(dm.CDSTroca);
+//      dm.CDSTroca.post;
     end;
     txtPreco.Clear;
     txtQuant.Text := '1';

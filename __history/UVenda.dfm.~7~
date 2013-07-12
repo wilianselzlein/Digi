@@ -1,7 +1,7 @@
 inherited FVenda: TFVenda
   Caption = 'Vendas'
-  ExplicitWidth = 650
-  ExplicitHeight = 350
+  ExplicitWidth = 642
+  ExplicitHeight = 339
   PixelsPerInch = 96
   TextHeight = 13
   object Splitter1: TSplitter [0]
