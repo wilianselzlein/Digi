@@ -23,7 +23,6 @@ type
     procedure DBGrid1EditButtonClick(Sender: TObject);
     procedure DBGrid1KeyDown(Sender: TObject; var Key: Word;
       Shift: TShiftState);
-    procedure DBNavAcaoClick(Sender: TObject; Button: TNavigateBtn);
   private
     { Private declarations }
   public
@@ -59,23 +58,6 @@ begin
   inherited;
   if key = VK_F9 then
     DBGrid1EditButtonClick(nil);
-end;
-
-procedure TFVenda.DBNavAcaoClick(Sender: TObject; Button: TNavigateBtn);
-begin
-  inherited;
-  case Button of
-    nbDelete:
-    begin
-      dm.CDSVenda.Close;
-      dm.CDSTroca.Close;
-      dm.CDSVendaTroca.Close;
-      dm.CDSVenda.Open;
-      dm.CDSTroca.Open;
-      dm.CDSVendaTroca.Open;
-      dm.CDSVenda.Last;
-    end;
-  end;
 end;
 
 procedure TFVenda.Imprimir;

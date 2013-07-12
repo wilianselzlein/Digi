@@ -141,6 +141,7 @@ end;
 procedure TFVendaTroca.DBNavAcaoClick(Sender: TObject; Button: TNavigateBtn);
 begin
   case Button of
+<<<<<<< HEAD
     nbPost:
     begin
       if txtClienteId.Text = '' then
@@ -151,6 +152,9 @@ begin
       TesteValorVendaTroca;
 
     end;
+=======
+    nbPost: TesteValorVendaTroca;
+>>>>>>> 9d807d5e687a445aac5b37907161ac8192094a54
     nbInsert: txtClienteId.SetFocus;
     nbDelete:
     begin
@@ -176,8 +180,13 @@ end;
 
 procedure TFVendaTroca.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+<<<<<<< HEAD
 //  LimpaRelacionamentoTroca;
 //  RelacionaVendaTroca(vtTroca);
+=======
+  LimpaRelacionamentoTroca;
+  RelacionaVendaTroca(vtTroca);
+>>>>>>> 9d807d5e687a445aac5b37907161ac8192094a54
   Action := Cafree;
 end;
 
@@ -200,7 +209,10 @@ procedure TFVendaTroca.FormShow(Sender: TObject);
 begin
   if not dm.cdstroca.Active then
     dm.cdstroca.open;
+<<<<<<< HEAD
   dm.CDSVenda.Last;
+=======
+>>>>>>> 9d807d5e687a445aac5b37907161ac8192094a54
 end;
 
 procedure TFVendaTroca.Imprimir;
@@ -229,7 +241,10 @@ begin
 end;
 
 procedure TFVendaTroca.txtBarraKeyPress(Sender: TObject; var Key: Char);
+<<<<<<< HEAD
 var lProd: Integer;
+=======
+>>>>>>> 9d807d5e687a445aac5b37907161ac8192094a54
 begin
   if key = #13 then
   begin
@@ -245,17 +260,27 @@ begin
       txtBarra.SetFocus;
       Exit;
     end;
+<<<<<<< HEAD
     lProd := Dm.CDSProdutoID.AsInteger;
     if btnVenda.Down then
     begin
       if StrToFloatDef(txtQuant.Text, 1) > GetEstoque(lProd) then
+=======
+    if btnVenda.Down then
+    begin
+      if StrToFloatDef(txtQuant.Text, 1) > GetEstoque(dm.CDSProdutoID.AsInteger) then
+>>>>>>> 9d807d5e687a445aac5b37907161ac8192094a54
       begin
         txtBarra.Text := 'Estoque insuficiente!';
         txtBarra.SetFocus;
         exit;
       end;
       dm.CDSItemVenda.Append;
+<<<<<<< HEAD
       dm.CDSItemVendaPRODUTOS_ID.AsInteger := lProd;
+=======
+      dm.CDSItemVendaPRODUTOS_ID.AsInteger := dm.CDSProdutoID.AsInteger;
+>>>>>>> 9d807d5e687a445aac5b37907161ac8192094a54
       dm.CDSItemVendaQUANTIDADE.AsFloat := StrToFloatDef(txtQuant.Text, 1);
       dm.CDSItemVendaPRECO.AsFloat := ifThen(StrToFloatDef(txtPreco.Text, 0) > 0, StrToFloatDef(txtPreco.Text, 0), dm.CDSProdutoPRECO.AsFloat);
       dm.CDSItemVenda.Post;
@@ -280,11 +305,19 @@ begin
         dm.CDSTroca.Edit;
         dm.CDSTrocaDATATROCA.AsDateTime := dm.CDSVendaDATAVENDA.AsDateTime;
       end;
+<<<<<<< HEAD
 //      StatusCDS(dm.CDSTroca);
       dm.CDSItemTroca.Last;
       dm.CDSItemTroca.Append;
       dm.CDSItemTroca.Edit;
       dm.CDSItemTrocaPRODUTOS_ID.AsInteger := lProd;
+=======
+      StatusCDS(dm.CDSTroca);
+      dm.CDSItemTroca.Last;
+      dm.CDSItemTroca.Append;
+      dm.CDSItemTroca.Edit;
+      dm.CDSItemTrocaPRODUTOS_ID.AsInteger := dm.CDSProdutoID.AsInteger;
+>>>>>>> 9d807d5e687a445aac5b37907161ac8192094a54
       dm.CDSItemTrocaQUANTIDADE.AsFloat := StrToFloatDef(txtQuant.Text, 1);
       dm.CDSItemTrocaPRECO.AsFloat := ifThen(StrToFloatDef(txtPreco.Text, 0) > 0, StrToFloatDef(txtPreco.Text, 0), dm.CDSProdutoPRECO.AsFloat);
       try
@@ -297,8 +330,13 @@ begin
         end;
       end;
       StatusCDS(DM.CDSVenda);
+<<<<<<< HEAD
 //      StatusCDS(dm.CDSTroca);
 //      dm.CDSTroca.post;
+=======
+      if dm.CDSTroca.State in [dsedit, dsInsert] then
+        dm.CDSTroca.post;
+>>>>>>> 9d807d5e687a445aac5b37907161ac8192094a54
     end;
     txtPreco.Clear;
     txtQuant.Text := '1';
