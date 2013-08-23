@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.DBLookup, Vcl.StdCtrls, Vcl.Mask,
   Vcl.DBCtrls, Vcl.ComCtrls, Vcl.ExtCtrls, Vcl.ToolWin, Vcl.Grids, Vcl.DBGrids,
-  Data.DB, Math;
+  Data.DB, Math, Vcl.Buttons;
 
 type
   TFVendaTroca = class(TForm)
@@ -51,6 +51,12 @@ type
     Label13: TLabel;
     txtQuant: TEdit;
     txtPreco: TEdit;
+    ToolButton2: TToolButton;
+    btnRel: TToolButton;
+    Label14: TLabel;
+    txtDescValor: TDBEdit;
+    Label15: TLabel;
+    DBEdit2: TDBEdit;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure DBNavClick(Sender: TObject; Button: TNavigateBtn);
     procedure FormKeyDown(Sender: TObject; var Key: Word; Shift: TShiftState);
@@ -66,6 +72,7 @@ type
     procedure FormShow(Sender: TObject);
     procedure DBNavAcaoClick(Sender: TObject; Button: TNavigateBtn);
     procedure DBGrid1Enter(Sender: TObject);
+    procedure btnRelClick(Sender: TObject);
   private
     { Private declarations }
     procedure _KeyDown(var Key: Word);
@@ -117,6 +124,19 @@ procedure TFVendaTroca.btnProdutoClick(Sender: TObject);
 begin
   TxtBarra.Text := ConsultaProduto(dm.CDSProdutoBARRAS.FieldName);
   txtBarra.SetFocus;
+end;
+
+procedure TFVendaTroca.btnRelClick(Sender: TObject);
+begin
+  with dm.CDSVenda do
+  begin
+    Filtered := False;
+    with FiltroData do
+      Filter := 'DATAVENDA >= ' + QuotedStr(DateToStr(Inicial)) + ' AND DATAVENDA <= ' + QuotedStr(DateToStr(Final));
+    Filtered := True;
+    dm.frxVendaTrocaMes.ShowReport;
+    Filtered := False;
+  end;
 end;
 
 procedure TFVendaTroca.btnTrocaClick(Sender: TObject);
@@ -207,7 +227,7 @@ end;
 
 procedure TFVendaTroca.Timer1Timer(Sender: TObject);
 begin
-  txtTotal.Text := FormatFloat('R$ #,###,###0.00', dm.CDSVendaTOTALVENDIDO.AsFloat - dm.CDSTrocaTOTALTROCADO.AsFloat);
+  txtTotal.Text := FormatFloat('R$ #,###,###0.00', dm.CDSVendaSUBTOTAL.AsFloat - dm.CDSTrocaTOTALTROCADO.AsFloat);
 end;
 
 procedure TFVendaTroca.txtBarraKeyDown(Sender: TObject; var Key: Word;

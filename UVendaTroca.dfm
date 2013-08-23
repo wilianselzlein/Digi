@@ -128,6 +128,8 @@ object FVendaTroca: TFVendaTroca
     Color = clMoneyGreen
     ParentBackground = False
     TabOrder = 2
+    ExplicitLeft = 418
+    ExplicitTop = 49
     object Label5: TLabel
       Left = 6
       Top = 4
@@ -260,12 +262,14 @@ object FVendaTroca: TFVendaTroca
       Height = 98
       Align = alBottom
       TabOrder = 5
+      ExplicitLeft = 6
+      ExplicitTop = 151
       object Label9: TLabel
-        Left = 6
-        Top = 47
-        Width = 37
+        Left = 94
+        Top = 49
+        Width = 41
         Height = 16
-        Caption = 'Total'
+        Caption = 'Total:'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clWindowText
         Font.Height = -13
@@ -275,6 +279,45 @@ object FVendaTroca: TFVendaTroca
       end
       object Label3: TLabel
         Left = 6
+        Top = 6
+        Width = 63
+        Height = 16
+        Caption = 'Vendido:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label10: TLabel
+        Left = 6
+        Top = 49
+        Width = 54
+        Height = 16
+        Caption = 'Trocas:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label14: TLabel
+        Left = 93
+        Top = 6
+        Width = 45
+        Height = 16
+        Caption = 'Desc.:'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clWindowText
+        Font.Height = -13
+        Font.Name = 'MS Sans Serif'
+        Font.Style = [fsBold]
+        ParentFont = False
+      end
+      object Label15: TLabel
+        Left = 151
         Top = 6
         Width = 58
         Height = 16
@@ -286,23 +329,10 @@ object FVendaTroca: TFVendaTroca
         Font.Style = [fsBold]
         ParentFont = False
       end
-      object Label10: TLabel
-        Left = 92
-        Top = 7
-        Width = 54
-        Height = 16
-        Caption = 'Trocas:'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clWindowText
-        Font.Height = -13
-        Font.Name = 'MS Sans Serif'
-        Font.Style = [fsBold]
-        ParentFont = False
-      end
       object txtTotalVenda: TDBEdit
         Left = 7
         Top = 23
-        Width = 81
+        Width = 83
         Height = 21
         Color = clMoneyGreen
         DataField = 'TOTALVENDIDO'
@@ -311,9 +341,9 @@ object FVendaTroca: TFVendaTroca
         TabOrder = 0
       end
       object txtTotalTroca: TDBEdit
-        Left = 93
-        Top = 24
-        Width = 81
+        Left = 7
+        Top = 66
+        Width = 83
         Height = 21
         Color = clMoneyGreen
         DataField = 'TOTALTROCADO'
@@ -322,13 +352,33 @@ object FVendaTroca: TFVendaTroca
         TabOrder = 1
       end
       object txtTotal: TEdit
-        Left = 6
+        Left = 94
         Top = 66
-        Width = 171
+        Width = 139
         Height = 21
         Color = clMoneyGreen
         Enabled = False
         TabOrder = 2
+      end
+      object txtDescValor: TDBEdit
+        Left = 94
+        Top = 23
+        Width = 54
+        Height = 21
+        DataField = 'DESCONTO'
+        DataSource = Dm.DSVenda
+        TabOrder = 3
+      end
+      object DBEdit2: TDBEdit
+        Left = 151
+        Top = 23
+        Width = 83
+        Height = 21
+        Color = clMoneyGreen
+        DataField = 'SUBTOTAL'
+        DataSource = Dm.DSVenda
+        Enabled = False
+        TabOrder = 4
       end
     end
     object txtQuant: TEdit
@@ -353,7 +403,7 @@ object FVendaTroca: TFVendaTroca
     Width = 650
     Height = 22
     AutoSize = True
-    ButtonWidth = 94
+    ButtonWidth = 106
     Caption = 'ToolBar1'
     DrawingStyle = dsGradient
     GradientEndColor = clMoneyGreen
@@ -370,14 +420,14 @@ object FVendaTroca: TFVendaTroca
       OnClick = btnTrocaClick
     end
     object btnVenda: TToolButton
-      Left = 94
+      Left = 106
       Top = 0
       Caption = '&Venda'
       ImageIndex = 11
       OnClick = btnVendaClick
     end
     object ToolButton1: TToolButton
-      Left = 188
+      Left = 212
       Top = 0
       Width = 8
       Caption = 'ToolButton1'
@@ -385,7 +435,7 @@ object FVendaTroca: TFVendaTroca
       Style = tbsSeparator
     end
     object btnProduto: TToolButton
-      Left = 196
+      Left = 220
       Top = 0
       AutoSize = True
       Caption = 'Produtos F9'
@@ -393,14 +443,14 @@ object FVendaTroca: TFVendaTroca
       OnClick = btnProdutoClick
     end
     object btnCliente: TToolButton
-      Left = 285
+      Left = 309
       Top = 0
       Caption = 'Clientes F10'
       ImageIndex = 13
       OnClick = btnClienteClick
     end
     object ToolButton4: TToolButton
-      Left = 379
+      Left = 415
       Top = 0
       Width = 8
       Caption = 'ToolButton4'
@@ -408,11 +458,26 @@ object FVendaTroca: TFVendaTroca
       Style = tbsSeparator
     end
     object btnConsulta: TToolButton
-      Left = 387
+      Left = 423
       Top = 0
       Caption = 'Consultar F11'
       ImageIndex = 10
       OnClick = btnConsultaClick
+    end
+    object ToolButton2: TToolButton
+      Left = 529
+      Top = 0
+      Width = 8
+      Caption = 'ToolButton2'
+      ImageIndex = 11
+      Style = tbsSeparator
+    end
+    object btnRel: TToolButton
+      Left = 537
+      Top = 0
+      Caption = '&Relat'#243'rio Mensal'
+      ImageIndex = 15
+      OnClick = btnRelClick
     end
   end
   object DBGrid1: TDBGrid

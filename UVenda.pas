@@ -17,6 +17,8 @@ type
     Label2: TLabel;
     DBMemo1: TDBMemo;
     DBLookupComboBox1: TDBLookupComboBox;
+    Label3: TLabel;
+    DBEdit2: TDBEdit;
     procedure Imprimir; override;
     procedure DBGrid1DrawColumnCell(Sender: TObject; const Rect: TRect;
       DataCol: Integer; Column: TColumn; State: TGridDrawState);

@@ -6,7 +6,7 @@ pause
 
 git add --all
 
-git commit -m "Ultimos testes balcao"
+git commit -m "Campo desconto no balcao"
 
 git push origin master
 
