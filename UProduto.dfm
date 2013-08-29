@@ -1,6 +1,8 @@
 inherited FProduto: TFProduto
   Caption = 'Produtos'
   OnCreate = FormCreate
+  ExplicitWidth = 642
+  ExplicitHeight = 339
   PixelsPerInch = 96
   TextHeight = 13
   inherited DBGrid: TDBGrid
@@ -68,7 +70,7 @@ inherited FProduto: TFProduto
       ParentFont = False
     end
     object Label2: TLabel [2]
-      Left = 254
+      Left = 227
       Top = 28
       Width = 42
       Height = 16
@@ -82,7 +84,7 @@ inherited FProduto: TFProduto
       ParentFont = False
     end
     object Label3: TLabel [3]
-      Left = 452
+      Left = 399
       Top = 28
       Width = 47
       Height = 16
@@ -96,7 +98,7 @@ inherited FProduto: TFProduto
       ParentFont = False
     end
     object Label6: TLabel [4]
-      Left = 551
+      Left = 498
       Top = 28
       Width = 42
       Height = 16
@@ -109,10 +111,24 @@ inherited FProduto: TFProduto
       Font.Style = [fsBold]
       ParentFont = False
     end
+    object Label7: TLabel [5]
+      Left = 568
+      Top = 28
+      Width = 58
+      Height = 16
+      Caption = 'Estoque'
+      FocusControl = DBEdit5
+      Font.Charset = DEFAULT_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'MS Sans Serif'
+      Font.Style = [fsBold]
+      ParentFont = False
+    end
     object DBEdit1: TDBEdit
       Left = 55
       Top = 44
-      Width = 194
+      Width = 169
       Height = 21
       DataField = 'DESCRICAO'
       DataSource = DataSource
@@ -120,9 +136,9 @@ inherited FProduto: TFProduto
       OnKeyDown = txtPesquisaKeyDown
     end
     object DBEdit2: TDBEdit
-      Left = 254
+      Left = 227
       Top = 44
-      Width = 194
+      Width = 169
       Height = 21
       DataField = 'NOME'
       DataSource = DataSource
@@ -130,7 +146,7 @@ inherited FProduto: TFProduto
       OnKeyDown = txtPesquisaKeyDown
     end
     object DBEdit3: TDBEdit
-      Left = 452
+      Left = 399
       Top = 44
       Width = 95
       Height = 21
@@ -140,13 +156,23 @@ inherited FProduto: TFProduto
       OnKeyDown = txtPesquisaKeyDown
     end
     object DBEdit4: TDBEdit
-      Left = 551
+      Left = 498
       Top = 44
-      Width = 82
+      Width = 68
       Height = 21
       DataField = 'PRECO'
       DataSource = DataSource
       TabOrder = 5
+      OnKeyDown = txtPesquisaKeyDown
+    end
+    object DBEdit5: TDBEdit
+      Left = 568
+      Top = 44
+      Width = 61
+      Height = 21
+      DataField = 'ESTOQUE'
+      DataSource = DataSource
+      TabOrder = 6
       OnKeyDown = txtPesquisaKeyDown
     end
   end

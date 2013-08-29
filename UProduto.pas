@@ -42,9 +42,13 @@ type
     Label3: TLabel;
     DBEdit4: TDBEdit;
     Label6: TLabel;
+    Label7: TLabel;
+    DBEdit5: TDBEdit;
     procedure Importar; override;
     procedure Imprimir; override;
     procedure FormCreate(Sender: TObject);
+    procedure txtPesquisaKeyDown(Sender: TObject; var Key: Word;
+      Shift: TShiftState);
   private
     { Private declarations }
   public
@@ -88,7 +92,7 @@ begin
         Barra := ChildNodes['BARRAS'].Text;
         Preco := ChildNodes['PRECO_CONSUMIDOR'].Text;
         Codigo := ChildNodes['CODIGO'].Text;
-        Estoque := ChildNodes['QTD_ESTOQUE'].Text;
+        //Estoque := ChildNodes['QTD_ESTOQUE'].Text;
       end;
     end;
     Prods.Gravar;
@@ -101,6 +105,13 @@ end;
 procedure TFProduto.Imprimir;
 begin
   dm.frxProduto.ShowReport;
+end;
+
+procedure TFProduto.txtPesquisaKeyDown(Sender: TObject; var Key: Word;
+  Shift: TShiftState);
+begin
+  inherited;
+
 end;
 
 { TProdutos }

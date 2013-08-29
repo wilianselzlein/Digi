@@ -6,7 +6,7 @@ pause
 
 git add --all
 
-git commit -m "Campo desconto no balcao"
+git commit -m "Permitindo alteração no estoque"
 
 git push origin master
 
