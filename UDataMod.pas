@@ -162,6 +162,8 @@ type
     QVendaDESCONTO: TFMTBCDField;
     CDSVendaDESCONTO: TFMTBCDField;
     CDSVendaSUBTOTAL: TFloatField;
+    CDSItemVendaLKPDesc: TStringField;
+    CDSItemTrocaLKPDesc: TStringField;
     procedure CDSProdutoAfterDelete(DataSet: TDataSet);
     procedure CDSProdutoAfterPost(DataSet: TDataSet);
     procedure CDSProdutoNewRecord(DataSet: TDataSet);

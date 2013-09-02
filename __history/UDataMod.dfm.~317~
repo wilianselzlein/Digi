@@ -2499,6 +2499,7 @@ object Dm: TDm
     AfterCancel = CDSVendaAfterCancel
     BeforeDelete = CDSVendaBeforeDelete
     AfterDelete = CDSVendaAfterDelete
+    OnCalcFields = CDSVendaCalcFields
     OnNewRecord = CDSVendaNewRecord
     OnReconcileError = CDSProdutoReconcileError
     Left = 168
@@ -2539,10 +2540,17 @@ object Dm: TDm
       Size = 100
       Lookup = True
     end
-    object CDSVendaDescPerc: TFloatField
-      FieldKind = fkInternalCalc
-      FieldName = 'DescPerc'
-      ProviderFlags = []
+    object CDSVendaDESCONTO: TFMTBCDField
+      FieldName = 'DESCONTO'
+      DisplayFormat = '0.00'
+      Precision = 18
+      Size = 4
+    end
+    object CDSVendaSUBTOTAL: TFloatField
+      FieldKind = fkCalculated
+      FieldName = 'SUBTOTAL'
+      currency = True
+      Calculated = True
     end
     object CDSVendaTMax: TAggregateField
       FieldName = 'TMax'
@@ -2579,6 +2587,11 @@ object Dm: TDm
     object QVendaOBS: TBlobField
       FieldName = 'OBS'
       Size = 1
+    end
+    object QVendaDESCONTO: TFMTBCDField
+      FieldName = 'DESCONTO'
+      Precision = 18
+      Size = 4
     end
   end
   object DSPVenda: TDataSetProvider
@@ -3743,11 +3756,12 @@ object Dm: TDm
         end
         object frxDBProdutoPRECO: TfrxMemoView
           Align = baRight
-          Left = 608.126377000000000000
+          Left = 657.260267000000000000
           Top = 11.338590000000010000
-          Width = 132.283550000000000000
+          Width = 83.149660000000000000
           Height = 18.897650000000000000
           ShowHint = False
+          DataField = 'SUBTOTAL'
           DataSet = frxDBVenda
           DataSetName = 'frxDBVenda'
           DisplayFormat.FormatStr = 'R$ %2.2f'
@@ -3755,7 +3769,7 @@ object Dm: TDm
           Frame.Typ = [ftTop]
           HAlign = haRight
           Memo.UTF8W = (
-            '[frxDBVenda."TOTALVENDIDO"]')
+            '[frxDBVenda."SUBTOTAL"]')
         end
         object frxDBProdutoDESCRICAO: TfrxMemoView
           Align = baLeft
@@ -3787,7 +3801,7 @@ object Dm: TDm
           Align = baLeft
           Left = 393.071120000000000000
           Top = 11.338590000000010000
-          Width = 215.433210000000000000
+          Width = 113.385900000000000000
           Height = 18.897650000000000000
           ShowHint = False
           DataSet = frxDBVenda
@@ -3795,6 +3809,40 @@ object Dm: TDm
           Frame.Typ = [ftTop]
           Memo.UTF8W = (
             '[frxDBVenda."OBS"]')
+        end
+        object Memo24: TfrxMemoView
+          Align = baRight
+          Left = 589.228726999999900000
+          Top = 11.338590000000010000
+          Width = 68.031540000000010000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'DESCONTO'
+          DataSet = frxDBVenda
+          DataSetName = 'frxDBVenda'
+          DisplayFormat.FormatStr = 'R$ %2.2f'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = [ftTop]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[frxDBVenda."DESCONTO"]')
+        end
+        object Memo25: TfrxMemoView
+          Align = baRight
+          Left = 506.079066999999900000
+          Top = 11.338590000000010000
+          Width = 83.149660000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'TOTALVENDIDO'
+          DataSet = frxDBVenda
+          DataSetName = 'frxDBVenda'
+          DisplayFormat.FormatStr = 'R$ %2.2f'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = [ftTop]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[frxDBVenda."TOTALVENDIDO"]')
         end
       end
       object PageFooter1: TfrxPageFooter
@@ -3840,8 +3888,8 @@ object Dm: TDm
         end
         object Memo8: TfrxMemoView
           Align = baRight
-          Left = 608.126377000000000000
-          Width = 132.283550000000000000
+          Left = 657.260267000000000000
+          Width = 83.149660000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -3851,7 +3899,7 @@ object Dm: TDm
           Font.Style = [fsBold]
           HAlign = haRight
           Memo.UTF8W = (
-            'Total Vendido')
+            'Total')
           ParentFont = False
         end
         object Memo4: TfrxMemoView
@@ -3887,7 +3935,7 @@ object Dm: TDm
         object Memo7: TfrxMemoView
           Align = baLeft
           Left = 393.071120000000000000
-          Width = 215.433210000000000000
+          Width = 113.385900000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -3897,6 +3945,38 @@ object Dm: TDm
           Font.Style = [fsBold]
           Memo.UTF8W = (
             'Obs')
+          ParentFont = False
+        end
+        object Memo22: TfrxMemoView
+          Align = baRight
+          Left = 589.228727000000000000
+          Width = 68.031539999999990000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Desconto')
+          ParentFont = False
+        end
+        object Memo23: TfrxMemoView
+          Align = baRight
+          Left = 506.079067000000100000
+          Width = 83.149660000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Vendido')
           ParentFont = False
         end
       end
@@ -4185,6 +4265,8 @@ object Dm: TDm
       'OBS=OBS'
       'QItemVenda=QItemVenda'
       'LKPCliente=LKPCliente'
+      'DESCONTO=DESCONTO'
+      'SUBTOTAL=SUBTOTAL'
       'TMax=TMax')
     DataSet = CDSVenda
     BCDToCurrency = False
@@ -5487,8 +5569,8 @@ object Dm: TDm
           HAlign = haRight
           Memo.UTF8W = (
             
-              '[SUM(<frxDBVenda."TOTALVENDIDO">,MasterData2) - SUM(<frxDBTroca.' +
-              '"TOTALTROCADO">,MasterData1)]')
+              '[SUM(<frxDBVenda."SUBTOTAL">,MasterData2) - SUM(<frxDBTroca."TOT' +
+              'ALTROCADO">,MasterData1)]')
         end
         object Memo20: TfrxMemoView
           Align = baRight
@@ -5612,7 +5694,7 @@ object Dm: TDm
           Width = 132.283550000000000000
           Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'TOTALVENDIDO'
+          DataField = 'SUBTOTAL'
           DataSet = frxDBVenda
           DataSetName = 'frxDBVenda'
           DisplayFormat.FormatStr = 'R$ %2.2f'
@@ -5620,7 +5702,7 @@ object Dm: TDm
           Frame.Typ = [ftTop]
           HAlign = haRight
           Memo.UTF8W = (
-            '[frxDBVenda."TOTALVENDIDO"]')
+            '[frxDBVenda."SUBTOTAL"]')
         end
         object Memo28: TfrxMemoView
           Align = baLeft
@@ -5684,7 +5766,7 @@ object Dm: TDm
         object Memo32: TfrxMemoView
           Align = baLeft
           Left = 158.740260000000000000
-          Width = 449.764070000000000000
+          Width = 249.448980000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -5700,7 +5782,7 @@ object Dm: TDm
           Align = baLeft
           Left = 158.740260000000000000
           Top = 18.897650000000000000
-          Width = 449.764070000000000000
+          Width = 249.448980000000000000
           Height = 18.897650000000000000
           ShowHint = False
           DataField = 'OBS'
@@ -5709,6 +5791,72 @@ object Dm: TDm
           Frame.Typ = [ftTop]
           Memo.UTF8W = (
             '[frxDBVenda."OBS"]')
+        end
+        object Memo52: TfrxMemoView
+          Align = baRight
+          Left = 528.756247000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Desconto')
+          ParentFont = False
+        end
+        object Memo53: TfrxMemoView
+          Align = baRight
+          Left = 407.811287000000100000
+          Width = 120.944960000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Subtotal')
+          ParentFont = False
+        end
+        object Memo54: TfrxMemoView
+          Align = baRight
+          Left = 528.756247000000000000
+          Top = 18.897650000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'DESCONTO'
+          DataSet = frxDBVenda
+          DataSetName = 'frxDBVenda'
+          DisplayFormat.FormatStr = 'R$ %2.2f'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = [ftTop]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[frxDBVenda."DESCONTO"]')
+        end
+        object Memo55: TfrxMemoView
+          Align = baRight
+          Left = 407.811287000000100000
+          Top = 18.897650000000000000
+          Width = 120.944960000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'TOTALVENDIDO'
+          DataSet = frxDBVenda
+          DataSetName = 'frxDBVenda'
+          DisplayFormat.FormatStr = 'R$ %2.2f'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = [ftTop]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[frxDBVenda."TOTALVENDIDO"]')
         end
       end
       object DetailData2: TfrxDetailData
@@ -6233,8 +6381,8 @@ object Dm: TDm
           HAlign = haRight
           Memo.UTF8W = (
             
-              '[SUM(<frxDBVenda."TOTALVENDIDO">,MasterData2) - SUM(<frxDBTroca.' +
-              '"TOTALTROCADO">,DetailData3)]')
+              '[SUM(<frxDBVenda."SUBTOTAL">,MasterData2) - SUM(<frxDBTroca."TOT' +
+              'ALTROCADO">,DetailData3)]')
           ParentFont = False
         end
         object Memo20: TfrxMemoView
@@ -6402,7 +6550,7 @@ object Dm: TDm
           Width = 132.283550000000000000
           Height = 18.897650000000000000
           ShowHint = False
-          DataField = 'TOTALVENDIDO'
+          DataField = 'SUBTOTAL'
           DataSet = frxDBVenda
           DataSetName = 'frxDBVenda'
           DisplayFormat.FormatStr = 'R$ %2.2f'
@@ -6410,7 +6558,7 @@ object Dm: TDm
           Frame.Typ = [ftTop]
           HAlign = haRight
           Memo.UTF8W = (
-            '[frxDBVenda."TOTALVENDIDO"]')
+            '[frxDBVenda."SUBTOTAL"]')
         end
         object Memo28: TfrxMemoView
           Align = baLeft
@@ -6474,7 +6622,7 @@ object Dm: TDm
         object Memo32: TfrxMemoView
           Align = baLeft
           Left = 158.740260000000000000
-          Width = 449.764070000000000000
+          Width = 249.448980000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -6490,7 +6638,7 @@ object Dm: TDm
           Align = baLeft
           Left = 158.740260000000000000
           Top = 18.897650000000000000
-          Width = 449.764070000000000000
+          Width = 249.448980000000000000
           Height = 18.897650000000000000
           ShowHint = False
           DataField = 'OBS'
@@ -6499,6 +6647,72 @@ object Dm: TDm
           Frame.Typ = [ftTop]
           Memo.UTF8W = (
             '[frxDBVenda."OBS"]')
+        end
+        object Memo47: TfrxMemoView
+          Align = baRight
+          Left = 528.756247000000000000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Desconto')
+          ParentFont = False
+        end
+        object Memo53: TfrxMemoView
+          Align = baRight
+          Left = 407.811287000000100000
+          Width = 120.944960000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          HAlign = haRight
+          Memo.UTF8W = (
+            'Subtotal')
+          ParentFont = False
+        end
+        object Memo54: TfrxMemoView
+          Align = baRight
+          Left = 528.756247000000000000
+          Top = 18.897650000000030000
+          Width = 79.370130000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'DESCONTO'
+          DataSet = frxDBVenda
+          DataSetName = 'frxDBVenda'
+          DisplayFormat.FormatStr = 'R$ %2.2f'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = [ftTop]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[frxDBVenda."DESCONTO"]')
+        end
+        object Memo55: TfrxMemoView
+          Align = baRight
+          Left = 407.811287000000100000
+          Top = 18.897650000000030000
+          Width = 120.944960000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          DataField = 'TOTALVENDIDO'
+          DataSet = frxDBVenda
+          DataSetName = 'frxDBVenda'
+          DisplayFormat.FormatStr = 'R$ %2.2f'
+          DisplayFormat.Kind = fkNumeric
+          Frame.Typ = [ftTop]
+          HAlign = haRight
+          Memo.UTF8W = (
+            '[frxDBVenda."TOTALVENDIDO"]')
         end
       end
       object DetailData2: TfrxDetailData
@@ -7139,8 +7353,8 @@ object Dm: TDm
           HAlign = haRight
           Memo.UTF8W = (
             
-              '[SUM(<frxDBVenda."TOTALVENDIDO">,MasterData2) - SUM(<frxDBTroca.' +
-              '"TOTALTROCADO">,DetailData3)]')
+              '[SUM(<frxDBVenda."SUBTOTAL">,MasterData2) - SUM(<frxDBTroca."TOT' +
+              'ALTROCADO">,DetailData3)]')
         end
         object Memo46: TfrxMemoView
           Align = baRight

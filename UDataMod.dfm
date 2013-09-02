@@ -58,7 +58,7 @@ object Dm: TDm
     Left = 104
     Top = 16
     Bitmap = {
-      494C010110006401640110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C010110006801680110001000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       0000000000003600000028000000400000005000000001002000000000000050
       0000000000000000000000000000000000000000000000000000000000000000
       0000000000000000000000000000000000000000000000000000000000000000
@@ -731,7 +731,7 @@ object Dm: TDm
     Left = 168
     Top = 16
     Bitmap = {
-      494C01010900E001E00120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
+      494C01010900E401E40120002000FFFFFFFFFF10FFFFFFFFFFFFFFFF424D3600
       00000000000036000000280000008000000060000000010020000000000000C0
       000000000000000000000000000000000000F4F7F0107EB455BF539C1EFF539C
       1EFF539C1EFF539C1EFF539C1EFF539C1EFF539C1EFF539C1EFF79B548FFFFFF
@@ -2656,6 +2656,16 @@ object Dm: TDm
       currency = True
       Calculated = True
     end
+    object CDSItemVendaLKPDesc: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LKPDesc'
+      LookupDataSet = CDSProduto
+      LookupKeyFields = 'ID'
+      LookupResultField = 'DESCRICAO'
+      KeyFields = 'PRODUTOS_ID'
+      Size = 80
+      Lookup = True
+    end
     object CDSItemVendaTMax: TAggregateField
       FieldName = 'TMax'
       Visible = True
@@ -2874,6 +2884,16 @@ object Dm: TDm
       FieldName = 'Total'
       currency = True
       Calculated = True
+    end
+    object CDSItemTrocaLKPDesc: TStringField
+      FieldKind = fkLookup
+      FieldName = 'LKPDesc'
+      LookupDataSet = CDSProduto
+      LookupKeyFields = 'ID'
+      LookupResultField = 'DESCRICAO'
+      KeyFields = 'PRODUTOS_ID'
+      Size = 80
+      Lookup = True
     end
     object CDSItemTrocaTMax: TAggregateField
       FieldName = 'TMax'
@@ -4284,6 +4304,7 @@ object Dm: TDm
       'PRECO=PRECO'
       'LKPProduto=LKPProduto'
       'Total=Total'
+      'LKPDesc=LKPDesc'
       'TMax=TMax'
       'TTotal=TTotal')
     DataSet = CDSItemVenda
@@ -4865,6 +4886,7 @@ object Dm: TDm
       'PRECO=PRECO'
       'LKPProduto=LKPProduto'
       'Total=Total'
+      'LKPDesc=LKPDesc'
       'TMax=TMax'
       'TTotal=TTotal')
     DataSet = CDSItemTroca
@@ -5106,7 +5128,7 @@ object Dm: TDm
       end
       object MasterData1: TfrxMasterData
         Height = 37.795300000000000000
-        Top = 427.086890000000000000
+        Top = 423.307360000000000000
         Width = 740.409927000000000000
         DataSet = frxDBTroca
         DataSetName = 'frxDBTroca'
@@ -5232,7 +5254,7 @@ object Dm: TDm
       end
       object PageFooter1: TfrxPageFooter
         Height = 22.677180000000000000
-        Top = 774.803650000000000000
+        Top = 767.244590000000000000
         Width = 740.409927000000000000
         object Memo1: TfrxMemoView
           Align = baClient
@@ -5339,8 +5361,8 @@ object Dm: TDm
         end
       end
       object DetailData1: TfrxDetailData
-        Height = 18.897650000000000000
-        Top = 529.134199999999900000
+        Height = 15.118120000000000000
+        Top = 525.354670000000100000
         Width = 740.409927000000000000
         DataSet = frxDBItemTroca
         DataSetName = 'frxDBItemTroca'
@@ -5348,14 +5370,14 @@ object Dm: TDm
         object Memo10: TfrxMemoView
           Align = baLeft
           Width = 41.574830000000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'ITEM'
           DataSet = frxDBItemTroca
           DataSetName = 'frxDBItemTroca'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -5373,7 +5395,7 @@ object Dm: TDm
           Align = baRight
           Left = 608.126377000000000000
           Width = 132.283550000000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'Total'
           DataSet = frxDBItemTroca
@@ -5382,7 +5404,7 @@ object Dm: TDm
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           HAlign = haRight
@@ -5400,15 +5422,15 @@ object Dm: TDm
         object Memo12: TfrxMemoView
           Align = baLeft
           Left = 41.574830000000000000
-          Width = 351.496290000000000000
-          Height = 18.897650000000000000
+          Width = 207.874150000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'LKPProduto'
           DataSet = frxDBItemTroca
           DataSetName = 'frxDBItemTroca'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -5426,14 +5448,14 @@ object Dm: TDm
           Align = baRight
           Left = 502.299622430000100000
           Width = 105.826754570000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'PRECO'
           DataSet = frxDBItemTroca
           DataSetName = 'frxDBItemTroca'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -5451,14 +5473,14 @@ object Dm: TDm
           Align = baRight
           Left = 392.693337860000100000
           Width = 109.606284570000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'QUANTIDADE'
           DataSet = frxDBItemTroca
           DataSetName = 'frxDBItemTroca'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -5472,10 +5494,35 @@ object Dm: TDm
             '[frxDBItemTroca."QUANTIDADE"]')
           ParentFont = False
         end
+        object Memo59: TfrxMemoView
+          Align = baLeft
+          Left = 249.448980000000000000
+          Width = 143.622140000000000000
+          Height = 15.118120000000000000
+          ShowHint = False
+          DataField = 'LKPDesc'
+          DataSet = frxDBItemTroca
+          DataSetName = 'frxDBItemTroca'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsItalic]
+          Highlight.Font.Charset = DEFAULT_CHARSET
+          Highlight.Font.Color = clBlack
+          Highlight.Font.Height = -13
+          Highlight.Font.Name = 'Arial'
+          Highlight.Font.Style = [fsItalic]
+          Highlight.Color = 15724527
+          Highlight.Condition = '<frxDBItemVenda."ITEM"> mod 2'
+          Memo.UTF8W = (
+            '[frxDBItemTroca."LKPDesc"]')
+          ParentFont = False
+        end
       end
       object Header1: TfrxHeader
         Height = 18.897650000000000000
-        Top = 487.559370000000000000
+        Top = 483.779840000000000000
         Width = 740.409927000000000000
         object Memo15: TfrxMemoView
           Align = baLeft
@@ -5510,7 +5557,7 @@ object Dm: TDm
         object Memo17: TfrxMemoView
           Align = baLeft
           Left = 41.574830000000000000
-          Width = 351.496290000000000000
+          Width = 207.874150000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -5552,10 +5599,25 @@ object Dm: TDm
             'Pre'#231'o')
           ParentFont = False
         end
+        object Memo58: TfrxMemoView
+          Align = baLeft
+          Left = 249.448980000000000000
+          Width = 143.622140000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold, fsItalic]
+          Memo.UTF8W = (
+            'Descri'#231#227'o')
+          ParentFont = False
+        end
       end
       object ReportSummary1: TfrxReportSummary
         Height = 98.267780000000000000
-        Top = 653.858690000000000000
+        Top = 646.299630000000000000
         Width = 740.409927000000000000
         object SysMemo1: TfrxSysMemoView
           Align = baRight
@@ -5629,7 +5691,7 @@ object Dm: TDm
       end
       object GroupHeader1: TfrxGroupHeader
         Height = 22.677180000000000000
-        Top = 381.732530000000000000
+        Top = 377.953000000000000000
         Width = 740.409927000000000000
         Condition = 'frxDBVenda."ID"'
         object Memo21: TfrxMemoView
@@ -5860,7 +5922,7 @@ object Dm: TDm
         end
       end
       object DetailData2: TfrxDetailData
-        Height = 18.897650000000000000
+        Height = 15.118120000000000000
         Top = 294.803340000000000000
         Width = 740.409927000000000000
         DataSet = frxDBItemVenda
@@ -5869,14 +5931,14 @@ object Dm: TDm
         object Memo39: TfrxMemoView
           Align = baLeft
           Width = 41.574830000000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'ITEM'
           DataSet = frxDBItemVenda
           DataSetName = 'frxDBItemVenda'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -5894,7 +5956,7 @@ object Dm: TDm
           Align = baRight
           Left = 608.126377000000000000
           Width = 132.283550000000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'Total'
           DataSet = frxDBItemVenda
@@ -5903,7 +5965,7 @@ object Dm: TDm
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           HAlign = haRight
@@ -5921,15 +5983,15 @@ object Dm: TDm
         object Memo41: TfrxMemoView
           Align = baLeft
           Left = 41.574830000000000000
-          Width = 351.496290000000000000
-          Height = 18.897650000000000000
+          Width = 207.874150000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'LKPProduto'
           DataSet = frxDBItemVenda
           DataSetName = 'frxDBItemVenda'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -5947,14 +6009,14 @@ object Dm: TDm
           Align = baRight
           Left = 502.299622430000100000
           Width = 105.826754570000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'PRECO'
           DataSet = frxDBItemVenda
           DataSetName = 'frxDBItemVenda'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -5972,14 +6034,14 @@ object Dm: TDm
           Align = baRight
           Left = 392.693337860000100000
           Width = 109.606284570000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'QUANTIDADE'
           DataSet = frxDBItemVenda
           DataSetName = 'frxDBItemVenda'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -5991,6 +6053,31 @@ object Dm: TDm
           Highlight.Condition = '<frxDBItemVenda."ITEM"> mod 2'
           Memo.UTF8W = (
             '[frxDBItemVenda."QUANTIDADE"]')
+          ParentFont = False
+        end
+        object Memo57: TfrxMemoView
+          Align = baLeft
+          Left = 249.448980000000000000
+          Width = 143.622140000000000000
+          Height = 15.118120000000000000
+          ShowHint = False
+          DataField = 'LKPDesc'
+          DataSet = frxDBItemVenda
+          DataSetName = 'frxDBItemVenda'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsItalic]
+          Highlight.Font.Charset = DEFAULT_CHARSET
+          Highlight.Font.Color = clBlack
+          Highlight.Font.Height = -13
+          Highlight.Font.Name = 'Arial'
+          Highlight.Font.Style = [fsItalic]
+          Highlight.Color = 15724527
+          Highlight.Condition = '<frxDBItemVenda."ITEM"> mod 2'
+          Memo.UTF8W = (
+            '[frxDBItemVenda."LKPDesc"]')
           ParentFont = False
         end
       end
@@ -6031,7 +6118,7 @@ object Dm: TDm
         object Memo36: TfrxMemoView
           Align = baLeft
           Left = 41.574830000000000000
-          Width = 351.496290000000000000
+          Width = 207.874150000000100000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -6073,10 +6160,25 @@ object Dm: TDm
             'Pre'#231'o')
           ParentFont = False
         end
+        object Memo56: TfrxMemoView
+          Align = baLeft
+          Left = 249.448980000000100000
+          Width = 143.622140000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold, fsItalic]
+          Memo.UTF8W = (
+            'Descri'#231#227'o')
+          ParentFont = False
+        end
       end
       object GroupFooter1: TfrxGroupFooter
         Height = 22.677180000000000000
-        Top = 336.378170000000000000
+        Top = 332.598640000000000000
         Width = 740.409927000000000000
         object SysMemo2: TfrxSysMemoView
           Align = baRight
@@ -6112,7 +6214,7 @@ object Dm: TDm
         object Memo49: TfrxMemoView
           Align = baRight
           Left = 502.299537000000100000
-          Top = 3.779529999999965000
+          Top = 3.779530000000022000
           Width = 105.826840000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -6136,7 +6238,7 @@ object Dm: TDm
       end
       object GroupFooter2: TfrxGroupFooter
         Height = 22.677180000000000000
-        Top = 570.709030000000000000
+        Top = 563.149970000000100000
         Width = 740.409927000000000000
         object SysMemo3: TfrxSysMemoView
           Align = baRight
@@ -6226,7 +6328,7 @@ object Dm: TDm
     PrintOptions.PrintOnSheet = 0
     ReportOptions.CreateDate = 41417.989893472200000000
     ReportOptions.Name = 'Relat'#243'rio'
-    ReportOptions.LastChange = 41507.450991342590000000
+    ReportOptions.LastChange = 41507.450991342600000000
     ScriptLanguage = 'PascalScript'
     ScriptText.Strings = (
       ''
@@ -6267,7 +6369,7 @@ object Dm: TDm
       end
       item
         Name = 'Data'
-        Value = ''
+        Value = Null
       end>
     Style = <>
     object Data: TfrxDataPage
@@ -6325,7 +6427,7 @@ object Dm: TDm
       end
       object PageFooter1: TfrxPageFooter
         Height = 22.677180000000000000
-        Top = 774.803650000000000000
+        Top = 763.465060000000000000
         Width = 740.409927000000000000
         object Memo1: TfrxMemoView
           Align = baClient
@@ -6352,7 +6454,7 @@ object Dm: TDm
         Width = 740.409927000000000000
         object Memo52: TfrxMemoView
           Align = baLeft
-          Width = 68.031540000000010000
+          Width = 68.031540000000000000
           Height = 18.897650000000000000
           Visible = False
           ShowHint = False
@@ -6363,7 +6465,7 @@ object Dm: TDm
       end
       object ReportSummary1: TfrxReportSummary
         Height = 18.897650000000000000
-        Top = 733.228820000000000000
+        Top = 721.890230000000000000
         Width = 740.409927000000000000
         object SysMemo1: TfrxSysMemoView
           Align = baRight
@@ -6404,7 +6506,7 @@ object Dm: TDm
       end
       object GroupHeader1: TfrxGroupHeader
         Height = 18.897650000000000000
-        Top = 393.071120000000000000
+        Top = 389.291590000000000000
         Width = 740.409927000000000000
         Condition = 'frxDBVenda."ID"'
         object Memo21: TfrxMemoView
@@ -6444,7 +6546,7 @@ object Dm: TDm
         end
         object Memo5: TfrxMemoView
           Align = baLeft
-          Width = 56.692950000000010000
+          Width = 56.692950000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -6497,8 +6599,8 @@ object Dm: TDm
         end
         object Memo44: TfrxMemoView
           Align = baRight
-          Left = 558.992487000000000000
-          Width = 68.031540000000010000
+          Left = 558.992487000000100000
+          Width = 68.031540000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -6683,7 +6785,7 @@ object Dm: TDm
         object Memo54: TfrxMemoView
           Align = baRight
           Left = 528.756247000000000000
-          Top = 18.897650000000030000
+          Top = 18.897650000000000000
           Width = 79.370130000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -6700,7 +6802,7 @@ object Dm: TDm
         object Memo55: TfrxMemoView
           Align = baRight
           Left = 407.811287000000100000
-          Top = 18.897650000000030000
+          Top = 18.897650000000000000
           Width = 120.944960000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -6716,7 +6818,7 @@ object Dm: TDm
         end
       end
       object DetailData2: TfrxDetailData
-        Height = 18.897650000000000000
+        Height = 15.118120000000000000
         Top = 309.921460000000000000
         Width = 740.409927000000000000
         DataSet = frxDBItemVenda
@@ -6725,14 +6827,14 @@ object Dm: TDm
         object Memo39: TfrxMemoView
           Align = baLeft
           Width = 41.574830000000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'ITEM'
           DataSet = frxDBItemVenda
           DataSetName = 'frxDBItemVenda'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -6750,7 +6852,7 @@ object Dm: TDm
           Align = baRight
           Left = 608.126377000000000000
           Width = 132.283550000000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'Total'
           DataSet = frxDBItemVenda
@@ -6759,7 +6861,7 @@ object Dm: TDm
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           HAlign = haRight
@@ -6777,15 +6879,15 @@ object Dm: TDm
         object Memo41: TfrxMemoView
           Align = baLeft
           Left = 41.574830000000000000
-          Width = 351.496290000000000000
-          Height = 18.897650000000000000
+          Width = 207.874150000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'LKPProduto'
           DataSet = frxDBItemVenda
           DataSetName = 'frxDBItemVenda'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -6803,14 +6905,14 @@ object Dm: TDm
           Align = baRight
           Left = 502.299622430000100000
           Width = 105.826754570000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'PRECO'
           DataSet = frxDBItemVenda
           DataSetName = 'frxDBItemVenda'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -6828,14 +6930,14 @@ object Dm: TDm
           Align = baRight
           Left = 392.693337860000100000
           Width = 109.606284570000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'QUANTIDADE'
           DataSet = frxDBItemVenda
           DataSetName = 'frxDBItemVenda'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -6847,6 +6949,31 @@ object Dm: TDm
           Highlight.Condition = '<frxDBItemVenda."ITEM"> mod 2'
           Memo.UTF8W = (
             '[frxDBItemVenda."QUANTIDADE"]')
+          ParentFont = False
+        end
+        object Memo57: TfrxMemoView
+          Align = baLeft
+          Left = 249.448980000000000000
+          Width = 143.622140000000000000
+          Height = 15.118120000000000000
+          ShowHint = False
+          DataField = 'LKPDesc'
+          DataSet = frxDBItemVenda
+          DataSetName = 'frxDBItemVenda'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsItalic]
+          Highlight.Font.Charset = DEFAULT_CHARSET
+          Highlight.Font.Color = clBlack
+          Highlight.Font.Height = -13
+          Highlight.Font.Name = 'Arial'
+          Highlight.Font.Style = [fsItalic]
+          Highlight.Color = 15724527
+          Highlight.Condition = '<frxDBItemVenda."ITEM"> mod 2'
+          Memo.UTF8W = (
+            '[frxDBItemVenda."LKPDesc"]')
           ParentFont = False
         end
       end
@@ -6887,7 +7014,7 @@ object Dm: TDm
         object Memo36: TfrxMemoView
           Align = baLeft
           Left = 41.574830000000000000
-          Width = 351.496290000000000000
+          Width = 207.874150000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -6929,10 +7056,25 @@ object Dm: TDm
             'Pre'#231'o')
           ParentFont = False
         end
+        object Memo56: TfrxMemoView
+          Align = baLeft
+          Left = 249.448980000000000000
+          Width = 143.622140000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold, fsItalic]
+          Memo.UTF8W = (
+            'Descri'#231#227'o')
+          ParentFont = False
+        end
       end
       object DetailData3: TfrxDetailData
         Height = 37.795300000000000000
-        Top = 434.645950000000000000
+        Top = 430.866420000000000000
         Width = 740.409927000000000000
         Child = frxVendaTrocaMes.Child1
         DataSet = frxDBTroca
@@ -7059,7 +7201,7 @@ object Dm: TDm
       end
       object Child1: TfrxChild
         Height = 18.897650000000000000
-        Top = 495.118430000000000000
+        Top = 491.338900000000000000
         Width = 740.409927000000000000
         object Memo15: TfrxMemoView
           Align = baLeft
@@ -7094,7 +7236,7 @@ object Dm: TDm
         object Memo17: TfrxMemoView
           Align = baLeft
           Left = 41.574830000000000000
-          Width = 351.496290000000000000
+          Width = 207.874150000000000000
           Height = 18.897650000000000000
           ShowHint = False
           Font.Charset = DEFAULT_CHARSET
@@ -7136,10 +7278,25 @@ object Dm: TDm
             'Pre'#231'o')
           ParentFont = False
         end
+        object Memo58: TfrxMemoView
+          Align = baLeft
+          Left = 249.448980000000000000
+          Width = 143.622140000000000000
+          Height = 18.897650000000000000
+          ShowHint = False
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = [fsBold, fsItalic]
+          Memo.UTF8W = (
+            'Descri'#231#227'o')
+          ParentFont = False
+        end
       end
       object SubdetailData1: TfrxSubdetailData
-        Height = 22.677180000000000000
-        Top = 536.693260000000000000
+        Height = 15.118120000000000000
+        Top = 532.913730000000000000
         Width = 740.409927000000000000
         DataSet = frxDBItemTroca
         DataSetName = 'frxDBItemTroca'
@@ -7147,14 +7304,14 @@ object Dm: TDm
         object Memo10: TfrxMemoView
           Align = baLeft
           Width = 41.574830000000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'ITEM'
           DataSet = frxDBItemTroca
           DataSetName = 'frxDBItemTroca'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -7172,7 +7329,7 @@ object Dm: TDm
           Align = baRight
           Left = 608.126377000000000000
           Width = 132.283550000000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'Total'
           DataSet = frxDBItemTroca
@@ -7181,7 +7338,7 @@ object Dm: TDm
           DisplayFormat.Kind = fkNumeric
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           HAlign = haRight
@@ -7199,15 +7356,15 @@ object Dm: TDm
         object Memo12: TfrxMemoView
           Align = baLeft
           Left = 41.574830000000000000
-          Width = 351.496290000000000000
-          Height = 18.897650000000000000
+          Width = 207.874150000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'LKPProduto'
           DataSet = frxDBItemTroca
           DataSetName = 'frxDBItemTroca'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -7225,14 +7382,14 @@ object Dm: TDm
           Align = baRight
           Left = 502.299622430000100000
           Width = 105.826754570000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'PRECO'
           DataSet = frxDBItemTroca
           DataSetName = 'frxDBItemTroca'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -7250,14 +7407,14 @@ object Dm: TDm
           Align = baRight
           Left = 392.693337860000100000
           Width = 109.606284570000000000
-          Height = 18.897650000000000000
+          Height = 15.118120000000000000
           ShowHint = False
           DataField = 'QUANTIDADE'
           DataSet = frxDBItemTroca
           DataSetName = 'frxDBItemTroca'
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -13
+          Font.Height = -11
           Font.Name = 'Arial'
           Font.Style = [fsItalic]
           Highlight.Font.Charset = DEFAULT_CHARSET
@@ -7271,10 +7428,35 @@ object Dm: TDm
             '[frxDBItemTroca."QUANTIDADE"]')
           ParentFont = False
         end
+        object Memo59: TfrxMemoView
+          Align = baLeft
+          Left = 249.448980000000000000
+          Width = 143.622140000000000000
+          Height = 15.118120000000000000
+          ShowHint = False
+          DataField = 'LKPDesc'
+          DataSet = frxDBItemTroca
+          DataSetName = 'frxDBItemTroca'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -11
+          Font.Name = 'Arial'
+          Font.Style = [fsItalic]
+          Highlight.Font.Charset = DEFAULT_CHARSET
+          Highlight.Font.Color = clBlack
+          Highlight.Font.Height = -13
+          Highlight.Font.Name = 'Arial'
+          Highlight.Font.Style = [fsItalic]
+          Highlight.Color = 15724527
+          Highlight.Condition = '<frxDBItemVenda."ITEM"> mod 2'
+          Memo.UTF8W = (
+            '[frxDBItemTroca."LKPDesc"]')
+          ParentFont = False
+        end
       end
       object Footer1: TfrxFooter
         Height = 18.897650000000000000
-        Top = 351.496290000000000000
+        Top = 347.716760000000000000
         Width = 740.409927000000000000
         object SysMemo2: TfrxSysMemoView
           Align = baRight
@@ -7330,11 +7512,11 @@ object Dm: TDm
       end
       object GroupFooter1: TfrxGroupFooter
         Height = 49.133890000000000000
-        Top = 623.622450000000000000
+        Top = 612.283860000000000000
         Width = 740.409927000000000000
         object Line1: TfrxLineView
           Align = baCenter
-          Left = 15.118120000000030000
+          Left = 15.118120000000020000
           Top = 34.015769999999970000
           Width = 710.173687000000000000
           ShowHint = False
@@ -7358,7 +7540,7 @@ object Dm: TDm
         end
         object Memo46: TfrxMemoView
           Align = baRight
-          Left = 392.693167000000000000
+          Left = 392.693167000000100000
           Width = 215.433210000000000000
           Height = 18.897650000000000000
           ShowHint = False
@@ -7374,8 +7556,8 @@ object Dm: TDm
         end
       end
       object GroupFooter2: TfrxGroupFooter
-        Height = 18.897649999999990000
-        Top = 582.047620000000000000
+        Height = 18.897650000000000000
+        Top = 570.709030000000000000
         Width = 740.409927000000000000
         object SysMemo3: TfrxSysMemoView
           Align = baRight

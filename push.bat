@@ -6,7 +6,7 @@ pause
 
 git add --all
 
-git commit -m "Permitindo alteração no estoque"
+git commit -m "Descricao no relatorio do balcao"
 
 git push origin master
 

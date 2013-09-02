@@ -158,6 +158,10 @@ type
     DSItemVenda: TDataSource;
     DSItemTroca: TDataSource;
     DSProduto: TDataSource;
+    frxVendaTrocaMes: TfrxReport;
+    QVendaDESCONTO: TFMTBCDField;
+    CDSVendaDESCONTO: TFMTBCDField;
+    CDSVendaSUBTOTAL: TFloatField;
     procedure CDSProdutoAfterDelete(DataSet: TDataSet);
     procedure CDSProdutoAfterPost(DataSet: TDataSet);
     procedure CDSProdutoNewRecord(DataSet: TDataSet);
@@ -191,6 +195,7 @@ type
     procedure CDSItemVendaPRODUTOS_IDChange(Sender: TField);
     procedure CDSItemVendaBeforePost(DataSet: TDataSet);
     procedure CDSVendaBeforePost(DataSet: TDataSet);
+    procedure CDSVendaCalcFields(DataSet: TDataSet);
   private
     { Private declarations }
   public
@@ -362,7 +367,7 @@ begin
   end;
 end;
 
-rocedure TDm.CDSVendaNewRecord(DataSet: TDataSet);
+procedure TDm.CDSVendaNewRecord(DataSet: TDataSet);
 begin
   CDSVendaDATAVENDA.AsDateTime := Date;
   try
@@ -453,16 +458,20 @@ begin
       '   Update Produtos Set Estoque = Estoque - New.Quantidade where Id = New.Produtos_Id; ' + #13 +
       ' end', True);
   end;
-  ExecSQL('UPDATE VERSAO SET ID = 3;', True);
+  if v < 4 then
+    ExecSQL('ALTER TABLE VENDA ADD DESCONTO NUMERIC(15,4) DEFAULT 0;', True);
+  ExecSQL('UPDATE VERSAO SET ID = 4;', True);
 end;
 
 procedure TDm.CDSVendaBeforePost(DataSet: TDataSet);
 begin
   if CDSVendaCLIENTES_ID.IsNull then
-  begin
     raise Exception.Create('Selecione o cliente!');
-    abort;
-  end;
+end;
+
+procedure TDm.CDSVendaCalcFields(DataSet: TDataSet);
+begin
+  CDSVendaSUBTOTAL.AsFloat := CDSVendaTOTALVENDIDO.AsFloat - CDSVendaDESCONTO.AsFloat;
 end;
 
 end.
