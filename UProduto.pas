@@ -92,7 +92,7 @@ begin
         Barra := ChildNodes['BARRAS'].Text;
         Preco := ChildNodes['PRECO_CONSUMIDOR'].Text;
         Codigo := ChildNodes['CODIGO'].Text;
-        //Estoque := ChildNodes['QTD_ESTOQUE'].Text;
+        Estoque := ChildNodes['QTD_ESTOQUE'].Text;
       end;
     end;
     Prods.Gravar;
